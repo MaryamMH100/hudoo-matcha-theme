@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import type React from 'react';
 import { render } from '@testing-library/react';
 import { MobilePageTitleBar } from '../../../app/components/layout/MobilePageTitleBar';
 
@@ -23,6 +24,12 @@ vi.mock('@tanstack/react-router', () => ({
 
 vi.mock('@salla.sa/twilight-theme-engine/i18n', () => ({
   useTranslation: () => ({ t: (_k: string, fb?: string) => fb ?? _k }),
+}));
+
+vi.mock('@salla.sa/twilight-components-react/cart-summary', () => ({
+  SallaCartSummary: ({ children }: { children?: React.ReactNode }) => (
+    <salla-cart-summary>{children}</salla-cart-summary>
+  ),
 }));
 
 beforeEach(() => {

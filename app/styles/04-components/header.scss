@@ -25,7 +25,8 @@
    (`top: var(--app-safe-area-top)`). 0px tall in a browser. Above the pinned bar
    (z-40), below the drawers and sheets (z-200 and up). */
 .site-header__safe-area {
-  @apply sticky top-0 z-[45] bg-white;
+  @apply sticky top-0 z-[45];
+  background-color: var(--hd-bg);
   height: var(--app-safe-area-top, 0px);
 }
 
@@ -1124,4 +1125,103 @@ body.topnav-is-dark .site-header--lite .site-header__bar {
 
 .site-header__mainmenu {
   @apply hidden;
+}
+
+/* =========================================================================
+   Hudoo header — Figma «03 · Theme – Mobile» → Header (390 × 75):
+   canvas background, menu at the start, logo centred, search · bag at the end,
+   24px ink icons, 16px accent badge on the bag. Overrides the starter rules
+   above; kept together here so the brand layer is easy to find.
+   ========================================================================= */
+.site-header__bar {
+  background-color: var(--hd-bg);
+
+  &.is-scrolled {
+    background-color: color-mix(in srgb, var(--hd-bg) 94%, transparent);
+    border-color: var(--hd-line);
+    box-shadow: var(--hd-shadow-soft);
+    backdrop-filter: saturate(1.2) blur(8px);
+  }
+}
+
+.site-header__bar-outer,
+.site-header__bar-inner {
+  @apply min-h-[75px] lg:min-h-[88px];
+}
+
+.site-header__bar-inner {
+  @apply gap-2 px-[18px] lg:px-5;
+}
+
+.header-action {
+  @apply h-11 w-11 hover:bg-transparent;
+  color: var(--hd-text);
+
+  &:hover {
+    color: var(--hd-primary);
+    background-color: color-mix(in srgb, var(--hd-primary) 8%, transparent);
+  }
+
+  svg:not(.s-user-menu-dropdown-item *) {
+    @apply h-6 w-6;
+  }
+}
+
+.site-header__actions {
+  @apply gap-0 sm:gap-1;
+}
+
+/* Logo: the merchant's logo, about 55px tall on phones (Figma Enso mark). */
+.site-header__brand img {
+  @apply h-[55px] max-w-[150px] lg:h-14 lg:max-w-[180px];
+}
+
+.site-header__bar.is-scrolled .site-header__brand img {
+  @apply h-10;
+}
+
+/* Bag count — accent dot, 16px, white 9px semibold (Figma «Frame» on icon/bag). */
+.s-cart-summary-count {
+  @apply h-4 min-w-[16px] px-1 text-[9px] font-semibold leading-none;
+  background-color: var(--hd-accent) !important;
+  color: var(--hd-on-primary) !important;
+  border-radius: 9999px;
+  /* Figma: on the bag's upper start corner (right side in Arabic). */
+  top: 4px !important;
+  bottom: auto !important;
+  inset-inline-start: 4px !important;
+  inset-inline-end: auto !important;
+  transform: none !important;
+}
+
+/* Phones, home page: Figma shows menu · logo · search · bag, so bring back the
+   three buttons the starter hides there for its bottom bar. */
+@media (max-width: 767px) {
+  .site-header--home {
+    .site-header__nav-toggle button {
+      display: inline-grid;
+    }
+
+    .header-action.site-header__search {
+      display: inline-grid;
+    }
+
+    .site-header__actions salla-cart-summary {
+      display: inline-block;
+    }
+  }
+}
+
+/* Drawer in brand colours */
+.site-nav-drawer {
+  background-color: var(--hd-surface);
+}
+
+.site-nav-drawer__link,
+.site-nav-drawer__loc {
+  color: var(--hd-text);
+
+  &:hover {
+    color: var(--hd-primary);
+  }
 }

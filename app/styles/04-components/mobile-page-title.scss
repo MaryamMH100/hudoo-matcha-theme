@@ -45,3 +45,29 @@ body.product-single .mobile-page-title {
     @apply hidden;
   }
 }
+
+/* Hudoo — Figma «02 · Category → Top bar» (390 × 52): back · centred title · bag. */
+.mobile-page-title {
+  @apply grid h-[52px] grid-cols-[44px_1fr_44px] gap-0 px-[10px];
+  background-color: var(--hd-bg);
+  border-color: var(--hd-line);
+}
+
+.mobile-page-title__back {
+  @apply m-0 h-11 w-11;
+  color: var(--hd-text);
+
+  svg {
+    @apply h-6 w-6;
+  }
+}
+
+.mobile-page-title__text {
+  @apply text-center font-semibold;
+  color: var(--hd-text);
+}
+
+/* The cart page doesn't need a link to itself. */
+body.cart .mobile-page-title__cart {
+  visibility: hidden;
+}

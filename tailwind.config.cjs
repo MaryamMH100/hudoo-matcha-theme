@@ -4,6 +4,10 @@ const path = require('path');
 // In the monorepo the installed engine links to the live package, whose dist a
 // rebuild rewrites under a running dev server; scan its source there instead.
 const engineSrc = path.join(__dirname, '../theme-engine/src');
+// Hudoo tokens: CSS variables (app/lib/tokens.ts), with Tailwind opacity support
+// (`bg-primary/10`) through color-mix.
+const token = (name) => `color-mix(in srgb, var(--hd-${name}) calc(<alpha-value> * 100%), transparent)`;
+
 const engineContent = fs.existsSync(engineSrc)
   ? `${engineSrc}/**/*.{js,ts,jsx,tsx}`
   : './node_modules/@salla.sa/twilight-theme-engine/dist/**/*.js';
@@ -23,16 +27,21 @@ module.exports = {
   safelist: ['object-contain', 'object-cover'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
+    // Content max ~1200px (1240 − 2 × 20px gutters), 20px gutters as in Figma.
     container: {
       center: true,
-      padding: '10px',
+      padding: '20px',
       screens: {
-        '2xl': '1280px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1240px',
       },
     },
     fontFamily: {
-      sans: ['var(--font-main)', '-apple-system', 'BlinkMacSystemFont'],
-      primary: 'var(--font-main)',
+      sans: ['var(--hd-font-ui)'],
+      primary: 'var(--hd-font-ui)',
+      display: ['var(--hd-font-display)'],
     },
     extend: {
       transitionTimingFunction: {
@@ -45,8 +54,22 @@ module.exports = {
         dark: '#1D1F1F',
         darker: '#0E0F0F',
         danger: '#AE0A0A',
-        primary: 'var(--color-primary)',
-        'primary-dark': 'var(--color-primary-dark)',
+        primary: token('primary'),
+        'primary-dark': token('deep'),
+        canvas: token('bg'),
+        surface: token('surface'),
+        line: token('line'),
+        ink: token('text'),
+        muted: token('muted'),
+        'on-primary': token('on-primary'),
+        deep: token('deep'),
+        highlight: token('highlight'),
+        accent: token('accent'),
+        grade: {
+          ceremonial: token('grade-ceremonial'),
+          premium: token('grade-premium'),
+          culinary: token('grade-culinary'),
+        },
       },
       spacing: {
         3.75: '15px',
@@ -59,6 +82,8 @@ module.exports = {
         200: '800px',
       },
       borderRadius: {
+        card: 'var(--hd-radius-card)',
+        'card-lg': 'var(--hd-radius-card-lg)',
         large: '22px',
         big: '40px',
         tiny: '3px',
@@ -79,6 +104,8 @@ module.exports = {
         20: '5rem',
       },
       boxShadow: {
+        soft: 'var(--hd-shadow-soft)',
+        lift: 'var(--hd-shadow-lift)',
         default: '5px 10px 30px #2B2D340D;',
         top: '0px 0px 10px #0000001A;',
         md: '5px 10px 99px #2B2D340D',

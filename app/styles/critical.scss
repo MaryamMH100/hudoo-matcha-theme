@@ -6,10 +6,12 @@
 @tailwind utilities;
 
 @import './01-settings/global';
+@import './01-settings/tokens';
 @import './01-settings/breakpoints';
 
 @import './02-generic/reset';
 @import './02-generic/common';
+@import './02-generic/hudoo-base';
 @import './02-generic/animations';
 @import './02-generic/rtl';
 @import './02-generic/ltr';
@@ -19,6 +21,7 @@
 
 @import './03-elements/buttons';
 
+@import './04-components/announcement';
 @import './04-components/header';
 @import './04-components/social';
 @import './04-components/mobile-bottom-bar';
@@ -34,7 +37,7 @@
 }
 
 body {
-  font-family: var(--font-main);
+  font-family: var(--hd-font-ui);
 }
 
 html {

@@ -13,6 +13,7 @@ import { Link, Image } from '@salla.sa/twilight-theme-engine/common';
 import { ImageModal } from '@salla.sa/twilight-theme-engine/modal';
 import { MadeWithSalla } from '@salla.sa/twilight-theme-engine/layout';
 import { menu } from '@salla.sa/twilight-theme-engine/api/menu';
+import { localizedText, safeUrl } from '../../lib/settings';
 
 /** Salla's value-added-tax badge icon (70×70, CDN-resized) — a platform
  *  asset shared by every store, not specific to any one theme. */
@@ -202,19 +203,21 @@ function FooterApps({ className }: { className: string }) {
 
 /** The logo link, same shape in both layouts -- only its own spacing differs. */
 function FooterLogo({ className }: { className: string }) {
-  const { store } = useTwilight();
+  const { store, theme } = useTwilight();
+  // A light version of the logo for the dark footer (`footer_logo` setting).
+  const footerLogo = safeUrl((theme?.settings as Record<string, unknown> | undefined)?.footer_logo);
   return (
     <Link
       to="/"
       className={`store-footer__logo inline-flex items-center m-0 transition-opacity hover:opacity-75 ${className}`}
     >
       <Image
-        src={store.logo}
+        src={footerLogo || store.logo}
         alt={store.name || 'Store'}
         width={150}
-        height={44}
+        height={96}
         objectFit="contain"
-        className="h-11 w-auto max-w-[180px]"
+        className="h-20 w-auto max-w-[180px] lg:h-24"
       />
     </Link>
   );
@@ -230,28 +233,6 @@ function FooterDescription({ className }: { className: string }) {
       className={`store-footer__desc opacity-80 ${className}`}
       dangerouslySetInnerHTML={{ __html: store.description }}
     />
-  );
-}
-
-/** The store's phone and email as one "Contact us: …" row under the description
- *  (`<salla-contacts>`'s compact `isHeader` layout, which shows only those two).
- *  Renders nothing when the store has neither. */
-function FooterContacts({ className }: { className: string }) {
-  const { store } = useTwilight();
-  const { t } = useTranslation();
-  // The web component fills its light DOM before React hydrates the footer, a hydration error.
-  const isClient = useIsClient();
-  if (!store.contacts?.phone && !store.contacts?.email) return null;
-  return (
-    <div className={`store-footer__contacts ${className}`}>
-      {isClient && (
-        <SallaContacts
-          contacts={store.contacts}
-          contactsTitle={t('blocks.footer.social', 'Contact us')}
-          isHeader
-        />
-      )}
-    </div>
   );
 }
 
@@ -277,139 +258,87 @@ function FooterContactsColumn({ inSheet, dark }: { inSheet: boolean; dark: boole
   );
 }
 
-/** Centered layout: logo, description, contacts, social, footer menu, trust
- *  badges and app buttons stacked as one centered column. */
-function FooterCenteredBody({ inSheet, isDark }: { inSheet: boolean; isDark: boolean }) {
-  return (
-    <div className="container mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
-      <FooterLogo className="" />
-      <FooterDescription className="" />
-      <FooterContacts className="" />
-      <SallaSocial />
-
-      <FooterLinksMenu
-        inSheet={inSheet}
-        className="store-footer__menu store-footer__menu--inline"
-        dark={isDark}
-      />
-
-      <FooterTrust dark={isDark} centered />
-
-      <FooterApps className="flex flex-col items-center gap-3" />
-    </div>
-  );
-}
-
-/** Columns layout: brand (logo / description / social / trust), the footer menu
- *  and the store's contacts as labeled columns, and the app buttons, side by side.
- *  At `lg` they share one row: the brand two shares, each other column one. */
-function FooterColumnsBody({ inSheet, isDark }: { inSheet: boolean; isDark: boolean }) {
-  const { t } = useTranslation();
-
-  return (
-    <div className="container grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-flow-col lg:auto-cols-fr lg:gap-16">
-      <div className="store-footer__brand rtl:lg:pl-16 ltr:lg:pr-16 sm:col-span-2">
-        <FooterLogo className="mb-5" />
-        <FooterDescription className="max-w-sm leading-6 my-5" />
-        <SallaSocial className="block mb-6" />
-        <FooterTrust dark={isDark} centered={false} />
-      </div>
-
-      <FooterLinksMenu
-        inSheet={inSheet}
-        className="store-footer__menu store-footer__menu--stacked"
-        heading={t('blocks.footer.important_links', 'Important links')}
-        dark={isDark}
-      />
-
-      <FooterContactsColumn inSheet={inSheet} dark={isDark} />
-
-      <FooterApps className="" />
-    </div>
-  );
-}
-
 export interface FooterProps {
   /**
    * Renders as a plain `<div>` (no second `<footer>` landmark) with the
-   * `footer:start` / `footer:end` hook slots skipped -- for a theme that
-   * repeats these widgets somewhere other than the page's own footer (a
-   * mobile sheet, for example) rather than rendering the real page footer a
-   * second time.
+   * `footer:start` / `footer:end` hook slots skipped -- for the mobile account
+   * sheet, which repeats these widgets outside the page footer.
    */
   inSheet?: boolean;
 }
 
+/** Short line under the logo: the theme's `footer_tagline` setting (plain text),
+ *  else the store description the merchant wrote in the dashboard. */
+function FooterTagline() {
+  const { theme } = useTwilight();
+  const { locale } = useTranslation();
+  const tagline = localizedText(
+    (theme?.settings as Record<string, unknown> | undefined)?.footer_tagline,
+    locale
+  );
+  if (tagline) return <p className="hd-footer__tagline">{tagline}</p>;
+  return <FooterDescription className="hd-footer__tagline" />;
+}
+
 /**
- * Storefront footer.
+ * Hudoo footer -- Figma «03 · Theme – Mobile → Footer»: a primary-deep band with
+ * the logo, a one-line tagline, the footer menu as a highlight-coloured row, a
+ * divider, then payment methods and the copyright line. On desktop the same
+ * pieces spread into columns (brand · links · contacts · trust).
  *
- * Fork of the engine `Footer` -- same markup and data, except the columns layout:
- * the store's contacts get their own "Contact us" column (one row per channel)
- * instead of a lone phone / email row under the description, and the "Important
- * links" column hides when the footer menu is empty. Upgrade notes: `FORKS.md`.
- *
- * Two layouts, chosen by the `footer_layout` theme setting:
- *  - **columns** (default): logo / description / social / trust badges, the
- *    footer menu ("important links"), and app-store buttons, side by side.
- *  - **centered**: the same pieces stacked as one centered column, with the
- *    footer menu laid out as an inline, pipe-separated row.
- *
- * Styling for the handful of pieces rendered by web components this owns no
- * markup for (`<salla-social>`'s `.social-link` icons, `<salla-menu>`'s
- * `.s-menu-footer-item` rows, `<salla-payments>`'s `.s-payments-list-item`
- * icons) is the consuming theme's own responsibility, the same way
- * `inSheet`'s own presentation is -- this component owns structure and data,
- * not every pixel.
+ * Fork of the engine `Footer` (see `FORKS.md`): same data and Salla widgets
+ * (menu, contacts, social, trust badges, tax / SBC, apps, payments), new layout.
+ * The `footer_layout` / `footer_is_dark` starter settings no longer apply: the
+ * footer always sits on the deep brand colour.
  */
 export function Footer({ inSheet = false }: FooterProps = {}) {
-  const { store, theme } = useTwilight();
+  const { store } = useTwilight();
   const { t } = useTranslation();
   const year = new Date().getFullYear();
-  const isCentered = theme.settings?.footer_layout === 'centered';
-  const isDark = !!theme.settings?.footer_is_dark;
-
   const Root = inSheet ? 'div' : 'footer';
 
   return (
     <Root
-      className={`store-footer store-footer--${isCentered ? 'centered' : 'columns'}${
-        inSheet ? ' store-footer--sheet' : ''
-      } relative mt-8 sm:mt-16 ${isDark ? 'bg-[#0E0F0F] text-white' : 'bg-[#F4F7F2] text-gray-600'}`}
+      className={`store-footer hd-footer${inSheet ? ' store-footer--sheet hd-footer--sheet' : ''}`}
       suppressHydrationWarning
     >
       {!inSheet && <HookSlot name="footer:start" />}
 
-      <div
-        aria-label="footer"
-        className={`store-footer__inner border-b py-8 lg:py-16 ${
-          isDark ? 'bg-[#1D1F1F] border-dashed border-white/10' : 'bg-transparent border-gray-200'
-        }`}
-      >
-        {isCentered ? (
-          <FooterCenteredBody inSheet={inSheet} isDark={isDark} />
-        ) : (
-          <FooterColumnsBody inSheet={inSheet} isDark={isDark} />
-        )}
+      <div className="hd-footer__inner container">
+        <div className="hd-footer__brand">
+          {!inSheet && <FooterLogo className="hd-footer__logo" />}
+          <FooterTagline />
+          <SallaSocial className="hd-footer__social" />
+        </div>
+
+        <FooterLinksMenu
+          inSheet={inSheet}
+          className="store-footer__menu hd-footer__menu"
+          heading={t('blocks.footer.important_links', 'Important links')}
+          dark
+        />
+
+        <FooterContactsColumn inSheet={inSheet} dark />
+
+        <div className="hd-footer__extras">
+          <FooterTrust dark centered={false} />
+          <FooterApps className="" />
+        </div>
       </div>
 
-      <div className="store-footer__bottom container md:flex items-center justify-between gap-4 py-4 lg:py-7 text-center">
-        <span className={`text-sm copyright-text ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
+      <div className="hd-footer__bottom container">
+        <span className="hd-footer__copyright">
           <HookSlot
             name="copyright"
             context={{ storeName: store.name }}
             fallback={
               <>
-                {t('blocks.footer.copyright', 'All rights reserved')}{' '}
-                <Link to="/" className="transition-opacity hover:opacity-75 hover:text-primary">
-                  {store.name}
-                </Link>{' '}
-                © {year}
+                © {store.name} {year} · {t('blocks.footer.copyright', 'All rights reserved')}
                 <MadeWithSalla className="ms-2" />
               </>
             }
           />
         </span>
-
         <SallaPayments />
       </div>
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRouterState } from '@tanstack/react-router';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
-import { ArrowRightIcon } from '../icons';
+import { SallaCartSummary } from '@salla.sa/twilight-components-react/cart-summary';
+import { ArrowRightIcon, ShoppingBagIcon } from '../icons';
 import { HOME_ROUTE_ID, PRODUCT_ROUTE_ID } from '../../lib/routeIds';
 
 type MaybePage = { page?: { title?: string } };
@@ -83,6 +84,10 @@ export function MobilePageTitleBar() {
         <ArrowRightIcon aria-hidden="true" />
       </button>
       <h1 className="mobile-page-title__text">{title}</h1>
+      {/* Figma «Category → Top bar»: the bag sits at the end of the bar. */}
+      <SallaCartSummary className="header-action mobile-page-title__cart">
+        <ShoppingBagIcon slot="icon" aria-hidden="true" />
+      </SallaCartSummary>
     </div>
   );
 }

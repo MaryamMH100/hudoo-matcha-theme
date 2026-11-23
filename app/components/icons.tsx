@@ -25,23 +25,36 @@ const stroke = {
   strokeLinejoin: 'round',
 } as const;
 
+/** Hudoo line icons from the Figma file (03 · Theme – Mobile → Header). 1.6 stroke. */
+const figmaStroke = { ...stroke, strokeWidth: 1.6 } as const;
+
 export const SearchIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg {...base} {...props}>
-    <path d="M17.5 17.5L22 22" {...stroke} />
-    <path
-      d="M20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11Z"
-      {...stroke}
-    />
+  <svg {...base} viewBox="0 0 22 22" {...props}>
+    <g transform="translate(3.32 3.32)">
+      <path
+        d="M12.7167 6.75833C12.7167 10.049 10.049 12.7167 6.75833 12.7167C3.46764 12.7167 0.8 10.049 0.8 6.75833C0.8 3.46764 3.46764 0.8 6.75833 0.8C10.049 0.8 12.7167 3.46764 12.7167 6.75833Z"
+        {...figmaStroke}
+      />
+      <path d="M15.0083 15.0083L11.3417 11.3417" {...figmaStroke} />
+    </g>
   </svg>
 );
 
 export const ShoppingBagIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg {...base} {...props}>
-    <path
-      d="M8 7H16C17.8856 7 18.8284 7 19.4142 7.58579C20 8.17157 20 9.11438 20 11V15C20 18.2998 20 19.9497 18.9749 20.9749C17.9497 22 16.2998 22 13 22H11C7.70017 22 6.05025 22 5.02513 20.9749C4 19.9497 4 18.2998 4 15V11C4 9.11438 4 8.17157 4.58579 7.58579C5.17157 7 6.11438 7 8 7Z"
-      {...stroke}
-    />
-    <path d="M16 9.5C16 5.63401 14.2091 2 12 2C9.79086 2 8 5.63401 8 9.5" {...stroke} />
+    <g transform="translate(4.2 2.7)">
+      <path d="M0.8 5.3H14.8L13.6 17.3H2L0.8 5.3Z" {...figmaStroke} />
+      <path
+        d="M4.8 5.3V3.8C4.8 3.00435 5.11607 2.24129 5.67868 1.67868C6.24129 1.11607 7.00435 0.8 7.8 0.8C8.59565 0.8 9.35871 1.11607 9.92132 1.67868C10.4839 2.24129 10.8 3.00435 10.8 3.8V5.3"
+        {...figmaStroke}
+      />
+    </g>
+  </svg>
+);
+
+export const MenuIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...props}>
+    <path d="M4 7H20M4 12H20M10 17H20" {...figmaStroke} />
   </svg>
 );
 

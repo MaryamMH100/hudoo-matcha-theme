@@ -227,3 +227,37 @@
     bottom: calc(76px + var(--safe-bottom)) #{!important};
   }
 }
+
+/* Hudoo — brand colours for the floating tab bar. Tabs are 44px tall
+   (tap target), the bar sits on `surface` with the soft brand shadow. */
+.mobile-bottom-bar {
+  --mbb-muted: var(--hd-muted);
+  --mbb-badge-bg: var(--hd-accent);
+  --mbb-badge-text: var(--hd-on-primary);
+}
+
+.mobile-bottom-bar__inner {
+  height: 56px;
+  background-color: var(--hd-surface);
+  box-shadow:
+    0 0 0 1px var(--hd-line),
+    var(--hd-shadow-lift);
+}
+
+.mobile-bottom-bar__item {
+  height: 44px;
+  min-width: 44px;
+
+  &.is-active {
+    background: var(--hd-primary);
+    color: var(--hd-on-primary);
+  }
+}
+
+.mobile-bottom-bar__badge {
+  border-color: var(--hd-surface);
+}
+
+.mobile-bottom-bar__item.is-active .mobile-bottom-bar__badge {
+  border-color: var(--hd-primary);
+}

@@ -51,10 +51,12 @@
 // Note: Tailwind directives are in app.css, not here
 
 @import './01-settings/global';
+@import './01-settings/tokens';
 @import './01-settings/breakpoints';
 
 @import './02-generic/reset';
 @import './02-generic/common';
+@import './02-generic/hudoo-base';
 @import './02-generic/tooltip';
 @import './02-generic/animations';
 @import './02-generic/rtl';
@@ -70,6 +72,7 @@
 @import './03-elements/radio';
 @import './03-elements/radio-images';
 
+@import './04-components/announcement';
 @import './04-components/header';
 @import './04-components/footer';
 @import './04-components/social';

@@ -42,21 +42,17 @@ function decl(rule: Rule, prop: string): string | undefined {
 }
 
 describe('page footer on mobile', () => {
-  it('hides only its widgets, so the footer:start / footer:end hook output stays visible', async () => {
+  // Hudoo shows the full footer on phones (Figma «Footer»), unlike Raed.
+  it('never hides the page footer or its parts', async () => {
     const root = await compile('footer.scss');
-
-    for (const part of ['__inner', '__bottom']) {
-      const [rule] = rulesFor(
-        root,
-        `.store-footer:not(.store-footer--sheet) > .store-footer${part}`
-      );
-      expect(rule?.parent?.type).toBe('atrule');
-      expect(decl(rule, 'display')).toBe('none');
-    }
-
-    for (const rule of rulesFor(root, '.store-footer:not(.store-footer--sheet)')) {
+    let checked = 0;
+    root.walkRules((rule) => {
+      if (!rule.selectors.some((sel) => /^\.(store|hd)-footer(__|\b)/.test(sel))) return;
+      if (rule.selectors.some((sel) => sel.includes('--sheet'))) return;
+      checked++;
       expect(decl(rule, 'display')).not.toBe('none');
-    }
+    });
+    expect(checked).toBeGreaterThan(3);
   });
 });
 

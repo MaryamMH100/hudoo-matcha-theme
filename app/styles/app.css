@@ -10,7 +10,7 @@
 
 /* Apply fonts from Salla SDK if available */
 body {
-  font-family: var(--font-main);
+  font-family: var(--hd-font-ui);
 }
 
 /* Reserve the scrollbar gutter on the viewport at all times. When a modal or
@@ -40,6 +40,6 @@ body.modal-is-open {
    doesn't paint one, which read as a grey/transparent flash behind every
    section before its own background loaded. */
 .app-inner {
-  @apply bg-white;
+  background-color: var(--hd-bg);
   overflow-x: clip;
 }

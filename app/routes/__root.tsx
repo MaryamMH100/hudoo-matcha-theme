@@ -29,6 +29,9 @@ export const Route = createTwilightRootRoute()({
   shellComponent: RootComponent,
 });
 
+const BRAND_FONTS_URL =
+  'https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Readex+Pro:wght@400;500;600&display=swap';
+
 // Server-only strings: the client bundle skips them; hydration adopts the inlined <style> by its href.
 const CRITICAL_CSS = {
   [HOME_ROUTE_ID]: import.meta.env.SSR ? homeCriticalCss : '',
@@ -45,6 +48,11 @@ function RootComponent() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Home and product paint from inline critical CSS; `bootClient` adds the full sheet once
             their first screen has painted. Other routes: the full sheet blocks, as before. */}
+        {/* Brand fonts: Amiri Bold (display headings) + Readex Pro (interface).
+            `display=swap` keeps text visible while they load. */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href={BRAND_FONTS_URL} />
         <ThemeStylesheet href={appCssUrl} critical={CRITICAL_CSS} />
         <ThemeHeadContent />
       </head>

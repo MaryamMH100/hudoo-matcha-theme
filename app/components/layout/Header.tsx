@@ -8,7 +8,8 @@ import { useTwilight } from '@salla.sa/twilight-theme-engine/providers';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { HookSlot } from '@salla.sa/twilight-theme-engine/hooks';
 import { Image } from '@salla.sa/twilight-theme-engine/common';
-import { MapPinIcon, SearchIcon, ShoppingBagIcon } from '../icons';
+import { MapPinIcon, MenuIcon, SearchIcon, ShoppingBagIcon } from '../icons';
+import { AnnouncementBar } from './AnnouncementBar';
 import { useAppSafeAreaTop } from '../../hooks/useAppSafeAreaTop';
 import { useNavHasContent } from '../../hooks/useNavHasContent';
 import { HOME_ROUTE_ID, PRODUCT_ROUTE_ID } from '../../lib/routeIds';
@@ -204,6 +205,7 @@ export function Header({ navOpen: navOpenProp, onNavOpenChange }: HeaderProps = 
       <HookSlot name="header:start" />
 
       <div className="site-header__ad">
+        <AnnouncementBar />
         <PageAdvertisements />
       </div>
 
@@ -240,13 +242,7 @@ export function Header({ navOpen: navOpenProp, onNavOpenChange }: HeaderProps = 
                   aria-expanded={navOpen}
                   onClick={() => setNavOpen(true)}
                 >
-                  {/* CSS burger — staggered bars that even out on hover/focus
-                      (styles: header.scss `.site-header__burger`). */}
-                  <span className="site-header__burger" aria-hidden="true">
-                    <span />
-                    <span />
-                    <span />
-                  </span>
+                  <MenuIcon aria-hidden="true" />
                 </button>
               )}
             </div>
@@ -278,10 +274,11 @@ export function Header({ navOpen: navOpenProp, onNavOpenChange }: HeaderProps = 
               {store?.scope && (
                 <ScopeButton label={store.scope.name || t('blocks.header.branches', 'Branches')} />
               )}
+              {/* Figma order (RTL): … search · bag, with the bag at the outer edge. */}
+              <SearchButton label={searchLabel} />
               <SallaCartSummary className="header-action">
                 <ShoppingBagIcon slot="icon" aria-hidden="true" />
               </SallaCartSummary>
-              <SearchButton label={searchLabel} />
             </div>
           </div>
         </div>

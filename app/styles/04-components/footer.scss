@@ -1,11 +1,21 @@
-/*
-  When the page ends on a full-bleed block (`s-block--full-bg` — its own colour
-  band runs edge-to-edge and butts against the footer), drop the gap above the
-  footer. Trailing empty `<salla-hook>`s aren't the last block, so match the
-  last `<section>`, past up to two empty blocks.
-  The engine's reorder block sits after the rest in its own wrapper: when it has
-  products it is the last block, and keeps the gap.
-*/
+/* =========================================================================
+   Hudoo footer — Figma «03 · Theme – Mobile → Footer» (390 × 306):
+   primary-deep band, 40px / 22px padding, items aligned to the start,
+   20px gaps, on-primary text, highlight links, a primary divider, then
+   payments · copyright in `line` colour at 12px.
+   Markup: app/components/layout/Footer.tsx.
+   ========================================================================= */
+
+.hd-footer {
+  @apply relative mt-12 lg:mt-20;
+  background-color: var(--hd-deep);
+  color: var(--hd-on-primary);
+}
+
+/* When the page ends on a full-bleed block (`s-block--full-bg`), it meets the
+   footer directly. Trailing empty `<salla-hook>`s aren't the last block, so match
+   the last `<section>` past up to two empty ones. The engine's reorder block
+   keeps the gap when it has products. */
 #main-content:has(
     > section[class*='full-bg']:last-of-type,
     > section[class*='full-bg']:nth-last-of-type(2) ~ section:empty:last-of-type,
@@ -14,85 +24,130 @@
   margin-top: 0;
 }
 
-/* `Footer` (`@salla.sa/twilight-theme-engine/layout`) owns its own structure
-   and colors (including footer_is_dark) via Tailwind classNames in the
-   component itself now -- nothing left to add there. What's left here is
-   just the handful of pieces rendered by web components Footer has no markup
-   of its own for, which it explicitly leaves to the consuming theme. */
-.store-footer {
-  .social-link {
-    @apply flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-sm transition duration-300 hover:opacity-75;
+.hd-footer__inner {
+  @apply grid grid-cols-1 gap-8 py-10 lg:grid-cols-[1.6fr_1fr_1fr_1fr] lg:gap-12 lg:py-16;
+  padding-inline: 22px;
+
+  @media (min-width: 1024px) {
+    padding-inline: 20px;
   }
 
-  /* Footer menu — `<salla-menu source="footer">` renders a bare
-     `.s-menu-footer-list` of `.s-menu-footer-item` anchors (no list markup).
-     Two presentations, picked by the modifier class `Footer` adds:
-       `--stacked` (columns layout) — a single vertical column, however many
-       links there are;
-       `--inline`  (centered layout) — a single pipe-separated row. */
-  &__menu {
-    @apply block;
+  /* Column headings from the shared pieces (links, contacts). */
+  h3 {
+    @apply mb-3 text-sm font-semibold lg:mb-4;
+    color: var(--hd-highlight) !important;
+  }
+}
 
-    &--stacked {
-      .s-menu-footer-list {
-        @apply block;
-      }
+.hd-footer__brand {
+  @apply flex flex-col items-start gap-5;
+}
 
-      .s-menu-footer-item {
-        @apply block text-[15px] leading-snug text-gray-600;
-        margin-bottom: 0.625rem;
+.hd-footer__logo img {
+  /* A dark logo would vanish on the deep band: the merchant can upload a light
+     one in the theme settings (`footer_logo`). */
+  @apply object-contain;
+}
 
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
+.hd-footer__tagline {
+  @apply m-0 max-w-sm text-sm leading-6;
+  color: var(--hd-on-primary);
+  opacity: 0.92;
+}
+
+/* Footer menu — <salla-menu source="footer"> renders `.s-menu-footer-item`
+   anchors. Phones: one wrapping row like Figma; desktop: a column. */
+.hd-footer__menu {
+  .s-menu-footer-list {
+    @apply flex flex-wrap gap-x-5 gap-y-3 lg:flex-col lg:gap-y-2.5;
+  }
+
+  .s-menu-footer-item {
+    @apply m-0 inline-flex min-h-[24px] items-center border-0 p-0 text-[13px] leading-snug lg:text-sm;
+    color: var(--hd-highlight) !important;
+
+    &:hover {
+      color: var(--hd-on-primary) !important;
     }
+  }
+}
 
-    &--inline {
-      .s-menu-footer-list {
-        @apply flex flex-wrap items-center justify-center gap-y-2;
-      }
+.hd-footer {
+  .social-link,
+  .s-social-link a {
+    @apply flex h-11 w-11 items-center justify-center rounded-full text-sm transition;
+    color: var(--hd-on-primary);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--hd-on-primary) 22%, transparent);
 
-      .s-menu-footer-item {
-        @apply border-e border-gray-300 px-3 text-[15px] leading-none text-gray-600 mb-0;
-
-        &:first-child {
-          @apply ps-0;
-        }
-      }
+    &:hover {
+      background-color: var(--hd-primary);
     }
+  }
+
+  .s-social-list {
+    @apply flex flex-wrap gap-2;
+  }
+
+  /* Contacts column rows (<salla-contacts>) */
+  .s-contacts-item,
+  .s-contacts-item a {
+    color: var(--hd-on-primary);
+  }
+
+  .s-contacts-icon {
+    color: var(--hd-highlight);
+  }
+}
+
+.hd-footer__extras {
+  @apply flex flex-col gap-5;
+}
+
+/* Divider + bottom row: copyright at the start, payment methods at the end. */
+.hd-footer__bottom {
+  @apply flex flex-col-reverse items-start gap-4 py-5 text-xs md:flex-row md:items-center md:justify-between;
+  padding-inline: 22px;
+  color: var(--hd-line);
+  border-top: 1px solid var(--hd-primary);
+
+  @media (min-width: 1024px) {
+    padding-inline: 20px;
+  }
+
+  .s-payments-list {
+    @apply flex flex-wrap items-center gap-2;
   }
 
   .s-payments-list-item {
-    @apply w-16;
+    @apply h-7 w-12 rounded-md p-1;
+    background-color: var(--hd-surface);
   }
 }
 
-/* Mobile: no page footer — its widgets live in the bottom bar's account sheet
-   (`MobileAccountSheet`, `.store-footer--sheet`). Same breakpoint as the bar.
-   Hidden with CSS rather than unmounted so the SSR'd footer (links, tax / SBC
-   details) stays in the document. Only the widgets are hidden: the
-   `footer:start` / `footer:end` hook output stays visible for apps. */
-@media (max-width: 767px) {
-  .store-footer:not(.store-footer--sheet) {
-    margin-top: 0;
+.hd-footer__copyright {
+  @apply leading-5;
 
-    > .store-footer__inner,
-    > .store-footer__bottom {
-      display: none;
-    }
+  a {
+    color: inherit;
   }
 }
 
-/* `footer_is_dark` darkens `.s-menu-footer-item`'s own border/text too -- the
-   one piece of dark-mode handling still theme-owned, since the two menu
-   variants above are. */
-body.footer-is-dark .store-footer {
-  &__menu--stacked .s-menu-footer-item {
-    @apply text-white;
+/* Inside the mobile account sheet: plain, on the sheet's own background. */
+.hd-footer--sheet {
+  @apply mt-0;
+  background-color: transparent;
+  color: var(--hd-text);
+
+  .hd-footer__inner {
+    @apply py-4;
   }
 
-  &__menu--inline .s-menu-footer-item {
-    @apply border-white/10 text-white;
+  .hd-footer__tagline,
+  .hd-footer__bottom {
+    color: var(--hd-muted);
+  }
+
+  .hd-footer__bottom {
+    border-color: var(--hd-line);
   }
 }

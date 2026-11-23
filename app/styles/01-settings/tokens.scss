@@ -1,0 +1,41 @@
+/* =========================================================================
+   Hudoo tokens — fallbacks.
+   The live values come from <ThemeTokens> (app/lib/tokens.ts), which writes
+   the preset + the merchant's colours on `body`. These :root values are the
+   Matcha preset, so anything painted before that style tag still looks right.
+   ========================================================================= */
+:root {
+  --hd-bg: #f2eee3;
+  --hd-surface: #fbf9f4;
+  --hd-line: #dcd6c6;
+  --hd-text: #141811;
+  --hd-muted: #6b6f63;
+  --hd-on-primary: #ffffff;
+  --hd-primary: #3f6b2a;
+  --hd-deep: #1e2e17;
+  --hd-highlight: #a9c96b;
+  --hd-accent: #b9805a;
+
+  /* Grade colours — fixed, they show the real colour of the matcha. */
+  --hd-grade-ceremonial: #7db23a;
+  --hd-grade-premium: #93a845;
+  --hd-grade-culinary: #8c8b3e;
+
+  /* Fonts: Readex Pro for the interface (or the store font when the merchant
+     turns brand fonts off), Amiri Bold for big display headings only. */
+  --hd-font-ui: var(--font-main), system-ui, sans-serif;
+  --hd-font-display: Amiri, var(--hd-font-ui);
+
+  /* Shape */
+  --hd-radius-card: 22px;
+  --hd-radius-card-lg: 26px;
+  --hd-radius-sm: 18px;
+  --hd-shadow-soft: 0 6px 24px -12px rgb(30 46 23 / 0.18);
+  --hd-shadow-lift: 0 14px 40px -18px rgb(30 46 23 / 0.28);
+
+  /* Layout */
+  --hd-content-max: 1200px;
+
+  /* Salla web components read this for their default corners. */
+  --s-radius: 18px;
+}

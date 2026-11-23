@@ -1,0 +1,16 @@
+/* Theme announcement bar (AnnouncementBar.tsx) — Figma «Announcement»:
+   primary-deep band, 11.5px Readex, centred, 9px vertical padding. */
+.hd-announcement {
+  @apply flex min-h-[32px] items-center justify-center px-4 py-[9px] text-center;
+  background-color: var(--hd-deep);
+  color: var(--hd-on-primary);
+
+  &__text {
+    @apply m-0 text-[11.5px] leading-snug lg:text-xs;
+    color: inherit;
+  }
+
+  a.hd-announcement__text {
+    @apply underline-offset-4 hover:underline;
+  }
+}

@@ -117,10 +117,4 @@ describe('Footer', () => {
     renderFooter();
     await waitFor(() => expect(screen.queryByText('Important links')).toBeNull());
   });
-
-  it('keeps the compact contacts row in the centered layout', () => {
-    state.theme = { settings: { footer_layout: 'centered' } };
-    renderFooter();
-    expect(screen.getByTestId('contacts-row')).toBeTruthy();
-  });
 });
