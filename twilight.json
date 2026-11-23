@@ -316,10 +316,7 @@
             "icon": "sicon-format-text-alt",
             "label": "نص الإعلان",
             "multilanguage": true,
-            "value": {
-                "ar": "شحن مبرّد مجاني فوق 199 ر.س  ·  توصيل خلال 48 ساعة",
-                "en": "Free chilled shipping over SAR 199  ·  Delivery in 48 hours"
-            },
+            "value": "شحن مبرّد مجاني فوق 199 ر.س  ·  توصيل خلال 48 ساعة",
             "required": false,
             "maxLength": 120,
             "groups": [
@@ -582,10 +579,7 @@
             "label": "جملة تعريفية تحت الشعار",
             "multilanguage": true,
             "description": "اتركها فارغة لعرض وصف المتجر من لوحة سلة.",
-            "value": {
-                "ar": "مساحة هادئة في يومك، تبدأ بكوب ماتشا.",
-                "en": "A calm moment in your day, starting with a cup of matcha."
-            },
+            "value": "مساحة هادئة في يومك، تبدأ بكوب ماتشا.",
             "required": false,
             "maxLength": 160,
             "groups": [
@@ -724,6 +718,1314 @@
         }
     ],
     "components": [
+        {
+            "key": "664d1c5c-5730-50f8-9264-44ee9b6b39d0",
+            "title": {
+                "ar": "هُدوء · الواجهة (Hero)",
+                "en": "Hudoo · Hero"
+            },
+            "icon": "sicon-image",
+            "path": "home.hd-hero",
+            "fields": [
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "hd-hero-note",
+                    "value": "<div>صورة كاملة بتدرّج غامق في الأسفل، شارة، عنوان كبير وزرّان. على الكمبيوتر يظهر النص بجانب الصورة.</div>"
+                },
+                {
+                    "type": "string",
+                    "format": "image",
+                    "id": "image",
+                    "label": "الصورة",
+                    "icon": "sicon-image",
+                    "value": null,
+                    "required": false,
+                    "description": "المقاس المقترح 1080×1620 بكسل (طولية). اتركها فارغة لصورة العرض."
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "badge",
+                    "label": "الشارة",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "وصل الحصاد الأول ٢٠٢٦",
+                    "required": false,
+                    "maxLength": 40
+                },
+                {
+                    "type": "string",
+                    "format": "textarea",
+                    "id": "title",
+                    "label": "العنوان",
+                    "icon": "sicon-typography",
+                    "multilanguage": true,
+                    "value": "طقوس هادئة،\nكوب كل يوم.",
+                    "required": false,
+                    "maxLength": 80,
+                    "description": "سطر جديد = سطر جديد في العنوان."
+                },
+                {
+                    "type": "string",
+                    "format": "textarea",
+                    "id": "text",
+                    "label": "النص",
+                    "icon": "sicon-typography",
+                    "multilanguage": true,
+                    "value": "ماتشا يابانية مختارة بعناية، مع دليل يساعدك تختار الدرجة المناسبة لك.",
+                    "required": false,
+                    "maxLength": 200
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "primary_text",
+                    "label": "نص الزر الأساسي",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "تسوّق الماتشا",
+                    "required": false,
+                    "maxLength": 30,
+                    "description": "اتركه فارغاً لإخفاء الزر."
+                },
+                {
+                    "type": "items",
+                    "format": "variable-list",
+                    "id": "primary_link",
+                    "label": "رابط الزر الأساسي",
+                    "icon": "sicon-link",
+                    "value": [],
+                    "required": false,
+                    "searchable": true,
+                    "source": "custom",
+                    "sources": [
+                        {
+                            "label": "منتج",
+                            "key": "products",
+                            "value": "products"
+                        },
+                        {
+                            "label": "منتجات مع وسم",
+                            "key": "products_tags",
+                            "value": "products_tags"
+                        },
+                        {
+                            "label": "تصنيف",
+                            "key": "categories",
+                            "value": "categories"
+                        },
+                        {
+                            "label": "ماركة تجارية",
+                            "key": "brands",
+                            "value": "brands"
+                        },
+                        {
+                            "label": "صفحة تعريفية",
+                            "key": "pages",
+                            "value": "pages"
+                        },
+                        {
+                            "label": "مقالة",
+                            "key": "blog_articles",
+                            "value": "blog_articles"
+                        },
+                        {
+                            "label": "تصنيف ضمن المدونة",
+                            "key": "blog_categories",
+                            "value": "blog_categories"
+                        },
+                        {
+                            "label": "التخفيضات",
+                            "key": "offers_link",
+                            "value": "offers_link"
+                        },
+                        {
+                            "label": "الماركات التجارية",
+                            "key": "brands_link",
+                            "value": "brands_link"
+                        },
+                        {
+                            "label": "المدونة",
+                            "key": "blog_link",
+                            "value": "blog_link"
+                        },
+                        {
+                            "label": "رابط خارجي",
+                            "key": "custom",
+                            "value": "custom"
+                        }
+                    ],
+                    "description": "بدون رابط يذهب لصفحة كل المنتجات."
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "secondary_text",
+                    "label": "نص الزر الثاني",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "اعرف الدرجات",
+                    "required": false,
+                    "maxLength": 30,
+                    "description": "اتركه فارغاً لإخفاء الزر."
+                },
+                {
+                    "type": "items",
+                    "format": "variable-list",
+                    "id": "secondary_link",
+                    "label": "رابط الزر الثاني",
+                    "icon": "sicon-link",
+                    "value": [],
+                    "required": false,
+                    "searchable": true,
+                    "source": "custom",
+                    "sources": [
+                        {
+                            "label": "منتج",
+                            "key": "products",
+                            "value": "products"
+                        },
+                        {
+                            "label": "منتجات مع وسم",
+                            "key": "products_tags",
+                            "value": "products_tags"
+                        },
+                        {
+                            "label": "تصنيف",
+                            "key": "categories",
+                            "value": "categories"
+                        },
+                        {
+                            "label": "ماركة تجارية",
+                            "key": "brands",
+                            "value": "brands"
+                        },
+                        {
+                            "label": "صفحة تعريفية",
+                            "key": "pages",
+                            "value": "pages"
+                        },
+                        {
+                            "label": "مقالة",
+                            "key": "blog_articles",
+                            "value": "blog_articles"
+                        },
+                        {
+                            "label": "تصنيف ضمن المدونة",
+                            "key": "blog_categories",
+                            "value": "blog_categories"
+                        },
+                        {
+                            "label": "التخفيضات",
+                            "key": "offers_link",
+                            "value": "offers_link"
+                        },
+                        {
+                            "label": "الماركات التجارية",
+                            "key": "brands_link",
+                            "value": "brands_link"
+                        },
+                        {
+                            "label": "المدونة",
+                            "key": "blog_link",
+                            "value": "blog_link"
+                        },
+                        {
+                            "label": "رابط خارجي",
+                            "key": "custom",
+                            "value": "custom"
+                        }
+                    ],
+                    "description": "بدون رابط ينزل إلى قسم «دليل الدرجات» في نفس الصفحة."
+                }
+            ]
+        },
+        {
+            "key": "d6de7412-1bbf-5e05-9590-186272ddf341",
+            "title": {
+                "ar": "هُدوء · شريط الثقة",
+                "en": "Hudoo · Trust strip"
+            },
+            "icon": "sicon-shield-check",
+            "path": "home.hd-trust",
+            "fields": [
+                {
+                    "type": "collection",
+                    "format": "collection",
+                    "id": "items",
+                    "label": "الوعود",
+                    "item_label": "وعد",
+                    "required": true,
+                    "minLength": 1,
+                    "maxLength": 4,
+                    "fields": [
+                        {
+                            "type": "items",
+                            "format": "dropdown-list",
+                            "id": "items.icon",
+                            "label": "الأيقونة",
+                            "icon": "sicon-list",
+                            "source": "Manual",
+                            "required": true,
+                            "selected": [
+                                {
+                                    "label": "ورقة",
+                                    "value": "leaf",
+                                    "key": "icon-leaf"
+                                }
+                            ],
+                            "options": [
+                                {
+                                    "label": "ثلج (شحن مبرّد)",
+                                    "value": "snow",
+                                    "key": "icon-snow"
+                                },
+                                {
+                                    "label": "رحى (مطحون بالحجر)",
+                                    "value": "mill",
+                                    "key": "icon-mill"
+                                },
+                                {
+                                    "label": "ورقة",
+                                    "value": "leaf",
+                                    "key": "icon-leaf"
+                                },
+                                {
+                                    "label": "مخفقة",
+                                    "value": "whisk",
+                                    "key": "icon-whisk"
+                                },
+                                {
+                                    "label": "حرارة",
+                                    "value": "thermo",
+                                    "key": "icon-thermo"
+                                },
+                                {
+                                    "label": "قطرة ماء",
+                                    "value": "drop",
+                                    "key": "icon-drop"
+                                },
+                                {
+                                    "label": "ملعقة",
+                                    "value": "spoon",
+                                    "key": "icon-spoon"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "string",
+                            "format": "text",
+                            "id": "items.text",
+                            "label": "النص",
+                            "icon": "sicon-format-text-alt",
+                            "multilanguage": true,
+                            "value": null,
+                            "required": true,
+                            "maxLength": 30
+                        }
+                    ],
+                    "value": [
+                        {
+                            "items.icon": "snow",
+                            "items.text": "شحن مبرّد"
+                        },
+                        {
+                            "items.icon": "mill",
+                            "items.text": "مطحونة بالحجر"
+                        },
+                        {
+                            "items.icon": "leaf",
+                            "items.text": "من أوجي، اليابان"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "2177fd3b-7232-56f8-a9e5-bf31282b4eb6",
+            "title": {
+                "ar": "هُدوء · دليل الدرجات",
+                "en": "Hudoo · Grade finder"
+            },
+            "icon": "sicon-filter",
+            "path": "home.hd-grade-finder",
+            "fields": [
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "hd-grade-note",
+                    "value": "<div>القسم المميز: العميل يختار الدرجة فتتغير الصورة والوصف ومقياس اللون والطعم. اختر لكل درجة التصنيف الخاص بها.</div>"
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "eyebrow",
+                    "label": "العنوان الصغير",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "دليل الدرجات",
+                    "required": false,
+                    "maxLength": 40
+                },
+                {
+                    "type": "string",
+                    "format": "textarea",
+                    "id": "title",
+                    "label": "العنوان",
+                    "icon": "sicon-typography",
+                    "multilanguage": true,
+                    "value": "كل درجة لها لون،\nولون الماتشا يحكي جودتها.",
+                    "required": false,
+                    "maxLength": 100
+                },
+                {
+                    "type": "collection",
+                    "format": "collection",
+                    "id": "grades",
+                    "label": "الدرجات",
+                    "item_label": "درجة",
+                    "required": true,
+                    "minLength": 1,
+                    "maxLength": 3,
+                    "fields": [
+                        {
+                            "type": "items",
+                            "format": "dropdown-list",
+                            "id": "grades.grade",
+                            "label": "الدرجة",
+                            "icon": "sicon-list",
+                            "source": "Manual",
+                            "required": true,
+                            "selected": [
+                                {
+                                    "label": "سيريمونيال",
+                                    "value": "ceremonial",
+                                    "key": "grade-ceremonial"
+                                }
+                            ],
+                            "options": [
+                                {
+                                    "label": "سيريمونيال",
+                                    "value": "ceremonial",
+                                    "key": "grade-ceremonial"
+                                },
+                                {
+                                    "label": "بريميوم",
+                                    "value": "premium",
+                                    "key": "grade-premium"
+                                },
+                                {
+                                    "label": "للطبخ",
+                                    "value": "culinary",
+                                    "key": "grade-culinary"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "string",
+                            "format": "image",
+                            "id": "grades.image",
+                            "label": "الصورة",
+                            "icon": "sicon-image",
+                            "value": null,
+                            "required": false,
+                            "description": "مربعة أو أفقية، 1000×720 بكسل تقريباً."
+                        },
+                        {
+                            "type": "string",
+                            "format": "text",
+                            "id": "grades.badge",
+                            "label": "شارة على الصورة",
+                            "icon": "sicon-format-text-alt",
+                            "multilanguage": true,
+                            "value": null,
+                            "required": false,
+                            "maxLength": 30
+                        },
+                        {
+                            "type": "string",
+                            "format": "textarea",
+                            "id": "grades.description",
+                            "label": "الوصف",
+                            "icon": "sicon-typography",
+                            "multilanguage": true,
+                            "value": null,
+                            "required": false,
+                            "maxLength": 160
+                        },
+                        {
+                            "type": "number",
+                            "format": "integer",
+                            "id": "grades.umami",
+                            "label": "أومامي (1–5)",
+                            "icon": "sicon-hashtag",
+                            "value": 3,
+                            "minimum": 1,
+                            "maximum": 5,
+                            "required": false
+                        },
+                        {
+                            "type": "number",
+                            "format": "integer",
+                            "id": "grades.sweetness",
+                            "label": "حلاوة (1–5)",
+                            "icon": "sicon-hashtag",
+                            "value": 3,
+                            "minimum": 1,
+                            "maximum": 5,
+                            "required": false
+                        },
+                        {
+                            "type": "number",
+                            "format": "integer",
+                            "id": "grades.bitterness",
+                            "label": "مرارة (1–5)",
+                            "icon": "sicon-hashtag",
+                            "value": 3,
+                            "minimum": 1,
+                            "maximum": 5,
+                            "required": false
+                        },
+                        {
+                            "type": "items",
+                            "format": "variable-list",
+                            "id": "grades.link",
+                            "label": "رابط زر التسوّق",
+                            "icon": "sicon-link",
+                            "value": [],
+                            "required": false,
+                            "searchable": true,
+                            "source": "custom",
+                            "sources": [
+                                {
+                                    "label": "منتج",
+                                    "key": "products",
+                                    "value": "products"
+                                },
+                                {
+                                    "label": "منتجات مع وسم",
+                                    "key": "products_tags",
+                                    "value": "products_tags"
+                                },
+                                {
+                                    "label": "تصنيف",
+                                    "key": "categories",
+                                    "value": "categories"
+                                },
+                                {
+                                    "label": "ماركة تجارية",
+                                    "key": "brands",
+                                    "value": "brands"
+                                },
+                                {
+                                    "label": "صفحة تعريفية",
+                                    "key": "pages",
+                                    "value": "pages"
+                                },
+                                {
+                                    "label": "مقالة",
+                                    "key": "blog_articles",
+                                    "value": "blog_articles"
+                                },
+                                {
+                                    "label": "تصنيف ضمن المدونة",
+                                    "key": "blog_categories",
+                                    "value": "blog_categories"
+                                },
+                                {
+                                    "label": "التخفيضات",
+                                    "key": "offers_link",
+                                    "value": "offers_link"
+                                },
+                                {
+                                    "label": "الماركات التجارية",
+                                    "key": "brands_link",
+                                    "value": "brands_link"
+                                },
+                                {
+                                    "label": "المدونة",
+                                    "key": "blog_link",
+                                    "value": "blog_link"
+                                },
+                                {
+                                    "label": "رابط خارجي",
+                                    "key": "custom",
+                                    "value": "custom"
+                                }
+                            ],
+                            "description": "اختر تصنيف هذه الدرجة. بدون رابط يذهب لكل المنتجات."
+                        },
+                        {
+                            "type": "string",
+                            "format": "text",
+                            "id": "grades.link_text",
+                            "label": "نص الزر",
+                            "icon": "sicon-format-text-alt",
+                            "multilanguage": true,
+                            "value": null,
+                            "required": false,
+                            "maxLength": 40,
+                            "description": "مثال: تسوّق السيريمونيال · 6 منتجات. فارغ = «تسوّق» + اسم الدرجة."
+                        }
+                    ],
+                    "value": [
+                        {
+                            "grades.grade": "ceremonial",
+                            "grades.badge": "الحصاد الأول",
+                            "grades.description": "ناعمة وحلوة بطبيعتها — تُشرب سادة بدون سكر.",
+                            "grades.umami": 5,
+                            "grades.sweetness": 4,
+                            "grades.bitterness": 1
+                        },
+                        {
+                            "grades.grade": "premium",
+                            "grades.badge": "للاتيه اليومي",
+                            "grades.description": "متوازنة وواضحة — مثالية للاتيه وللشرب اليومي.",
+                            "grades.umami": 4,
+                            "grades.sweetness": 3,
+                            "grades.bitterness": 2
+                        },
+                        {
+                            "grades.grade": "culinary",
+                            "grades.badge": "للخبز والحلويات",
+                            "grades.description": "طعم قوي ولون زيتوني — تثبت في الخبز والحلويات.",
+                            "grades.umami": 2,
+                            "grades.sweetness": 2,
+                            "grades.bitterness": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "d26c6980-bcc4-513a-b69e-0251ac34c338",
+            "title": {
+                "ar": "هُدوء · شريط منتجات",
+                "en": "Hudoo · Product rail"
+            },
+            "icon": "sicon-list-play",
+            "path": "home.hd-products-rail",
+            "fields": [
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "title",
+                    "label": "العنوان",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "الأكثر طلبًا",
+                    "required": false,
+                    "maxLength": 60
+                },
+                {
+                    "type": "items",
+                    "format": "dropdown-list",
+                    "id": "source",
+                    "label": "المنتجات المعروضة",
+                    "icon": "sicon-list",
+                    "source": "Manual",
+                    "required": true,
+                    "selected": [
+                        {
+                            "label": "الأكثر مبيعاً",
+                            "value": "best_selling",
+                            "key": "source-best_selling"
+                        }
+                    ],
+                    "options": [
+                        {
+                            "label": "الأكثر مبيعاً",
+                            "value": "best_selling",
+                            "key": "source-best_selling"
+                        },
+                        {
+                            "label": "الأحدث",
+                            "value": "latest",
+                            "key": "source-latest"
+                        },
+                        {
+                            "label": "العروض",
+                            "value": "offers",
+                            "key": "source-offers"
+                        },
+                        {
+                            "label": "الأعلى تقييماً",
+                            "value": "top-rated",
+                            "key": "source-top-rated"
+                        },
+                        {
+                            "label": "منتجات أختارها",
+                            "value": "selected",
+                            "key": "source-selected"
+                        }
+                    ]
+                },
+                {
+                    "type": "items",
+                    "format": "dropdown-list",
+                    "id": "products",
+                    "label": "المنتجات المختارة",
+                    "icon": "sicon-packed-box",
+                    "source": "products",
+                    "searchable": true,
+                    "multichoice": true,
+                    "selected": [],
+                    "options": [],
+                    "value": [],
+                    "required": false,
+                    "minLength": 0,
+                    "maxLength": 8,
+                    "description": "تُستخدم عند اختيار «منتجات أختارها»."
+                },
+                {
+                    "type": "number",
+                    "format": "integer",
+                    "id": "limit",
+                    "label": "عدد المنتجات",
+                    "icon": "sicon-hashtag",
+                    "value": 8,
+                    "minimum": 2,
+                    "maximum": 16,
+                    "required": false
+                },
+                {
+                    "type": "items",
+                    "format": "variable-list",
+                    "id": "display_all_url",
+                    "label": "رابط «عرض الكل»",
+                    "icon": "sicon-link",
+                    "value": [],
+                    "required": false,
+                    "searchable": true,
+                    "source": "custom",
+                    "sources": [
+                        {
+                            "label": "منتج",
+                            "key": "products",
+                            "value": "products"
+                        },
+                        {
+                            "label": "منتجات مع وسم",
+                            "key": "products_tags",
+                            "value": "products_tags"
+                        },
+                        {
+                            "label": "تصنيف",
+                            "key": "categories",
+                            "value": "categories"
+                        },
+                        {
+                            "label": "ماركة تجارية",
+                            "key": "brands",
+                            "value": "brands"
+                        },
+                        {
+                            "label": "صفحة تعريفية",
+                            "key": "pages",
+                            "value": "pages"
+                        },
+                        {
+                            "label": "مقالة",
+                            "key": "blog_articles",
+                            "value": "blog_articles"
+                        },
+                        {
+                            "label": "تصنيف ضمن المدونة",
+                            "key": "blog_categories",
+                            "value": "blog_categories"
+                        },
+                        {
+                            "label": "التخفيضات",
+                            "key": "offers_link",
+                            "value": "offers_link"
+                        },
+                        {
+                            "label": "الماركات التجارية",
+                            "key": "brands_link",
+                            "value": "brands_link"
+                        },
+                        {
+                            "label": "المدونة",
+                            "key": "blog_link",
+                            "value": "blog_link"
+                        },
+                        {
+                            "label": "رابط خارجي",
+                            "key": "custom",
+                            "value": "custom"
+                        }
+                    ],
+                    "description": "بدون رابط يختفي «عرض الكل»."
+                }
+            ]
+        },
+        {
+            "key": "3c2faccf-b1ed-5c72-af80-88ad8b36cc2c",
+            "title": {
+                "ar": "هُدوء · بنر طقم البداية",
+                "en": "Hudoo · Ritual kit banner"
+            },
+            "icon": "sicon-gift",
+            "path": "home.hd-ritual-kit",
+            "fields": [
+                {
+                    "type": "items",
+                    "format": "dropdown-list",
+                    "id": "product",
+                    "label": "منتج الطقم",
+                    "icon": "sicon-packed-box",
+                    "source": "products",
+                    "searchable": true,
+                    "multichoice": false,
+                    "selected": [],
+                    "options": [],
+                    "value": [],
+                    "required": false,
+                    "description": "يُعرض سعره ويصبح البنر رابطاً له."
+                },
+                {
+                    "type": "string",
+                    "format": "image",
+                    "id": "image",
+                    "label": "الصورة",
+                    "icon": "sicon-image",
+                    "value": null,
+                    "required": false,
+                    "description": "طولية 720×960 بكسل. فارغة = صورة المنتج."
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "eyebrow",
+                    "label": "العنوان الصغير",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "طقم البداية",
+                    "required": false,
+                    "maxLength": 40
+                },
+                {
+                    "type": "string",
+                    "format": "textarea",
+                    "id": "title",
+                    "label": "العنوان",
+                    "icon": "sicon-typography",
+                    "multilanguage": true,
+                    "value": "كل اللي تحتاجه\nلأول كوب.",
+                    "required": false,
+                    "maxLength": 80
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "text",
+                    "label": "ماذا في الطقم",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "ماتشا + مخفقة + وعاء + ملعقة",
+                    "required": false,
+                    "maxLength": 100
+                },
+                {
+                    "type": "items",
+                    "format": "variable-list",
+                    "id": "link",
+                    "label": "رابط (إن لم تختر منتجاً)",
+                    "icon": "sicon-link",
+                    "value": [],
+                    "required": false,
+                    "searchable": true,
+                    "source": "custom",
+                    "sources": [
+                        {
+                            "label": "منتج",
+                            "key": "products",
+                            "value": "products"
+                        },
+                        {
+                            "label": "منتجات مع وسم",
+                            "key": "products_tags",
+                            "value": "products_tags"
+                        },
+                        {
+                            "label": "تصنيف",
+                            "key": "categories",
+                            "value": "categories"
+                        },
+                        {
+                            "label": "ماركة تجارية",
+                            "key": "brands",
+                            "value": "brands"
+                        },
+                        {
+                            "label": "صفحة تعريفية",
+                            "key": "pages",
+                            "value": "pages"
+                        },
+                        {
+                            "label": "مقالة",
+                            "key": "blog_articles",
+                            "value": "blog_articles"
+                        },
+                        {
+                            "label": "تصنيف ضمن المدونة",
+                            "key": "blog_categories",
+                            "value": "blog_categories"
+                        },
+                        {
+                            "label": "التخفيضات",
+                            "key": "offers_link",
+                            "value": "offers_link"
+                        },
+                        {
+                            "label": "الماركات التجارية",
+                            "key": "brands_link",
+                            "value": "brands_link"
+                        },
+                        {
+                            "label": "المدونة",
+                            "key": "blog_link",
+                            "value": "blog_link"
+                        },
+                        {
+                            "label": "رابط خارجي",
+                            "key": "custom",
+                            "value": "custom"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "4e1d007d-6867-5237-aaae-99321925beb6",
+            "title": {
+                "ar": "هُدوء · طريقة التحضير",
+                "en": "Hudoo · Brew guide"
+            },
+            "icon": "sicon-coffee",
+            "path": "home.hd-brew-guide",
+            "fields": [
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "eyebrow",
+                    "label": "العنوان الصغير",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "الطريقة",
+                    "required": false,
+                    "maxLength": 40
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "title",
+                    "label": "العنوان",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "أربع خطوات، وكوبك جاهز.",
+                    "required": false,
+                    "maxLength": 80
+                },
+                {
+                    "type": "collection",
+                    "format": "collection",
+                    "id": "steps",
+                    "label": "الخطوات",
+                    "item_label": "خطوة",
+                    "required": true,
+                    "minLength": 2,
+                    "maxLength": 4,
+                    "fields": [
+                        {
+                            "type": "items",
+                            "format": "dropdown-list",
+                            "id": "steps.icon",
+                            "label": "الأيقونة",
+                            "icon": "sicon-list",
+                            "source": "Manual",
+                            "required": true,
+                            "selected": [
+                                {
+                                    "label": "ملعقة",
+                                    "value": "spoon",
+                                    "key": "icon-spoon"
+                                }
+                            ],
+                            "options": [
+                                {
+                                    "label": "ثلج (شحن مبرّد)",
+                                    "value": "snow",
+                                    "key": "icon-snow"
+                                },
+                                {
+                                    "label": "رحى (مطحون بالحجر)",
+                                    "value": "mill",
+                                    "key": "icon-mill"
+                                },
+                                {
+                                    "label": "ورقة",
+                                    "value": "leaf",
+                                    "key": "icon-leaf"
+                                },
+                                {
+                                    "label": "مخفقة",
+                                    "value": "whisk",
+                                    "key": "icon-whisk"
+                                },
+                                {
+                                    "label": "حرارة",
+                                    "value": "thermo",
+                                    "key": "icon-thermo"
+                                },
+                                {
+                                    "label": "قطرة ماء",
+                                    "value": "drop",
+                                    "key": "icon-drop"
+                                },
+                                {
+                                    "label": "ملعقة",
+                                    "value": "spoon",
+                                    "key": "icon-spoon"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "string",
+                            "format": "text",
+                            "id": "steps.value",
+                            "label": "القيمة",
+                            "icon": "sicon-format-text-alt",
+                            "multilanguage": true,
+                            "value": null,
+                            "required": false,
+                            "maxLength": 12,
+                            "description": "مثال: 2 جم"
+                        },
+                        {
+                            "type": "string",
+                            "format": "text",
+                            "id": "steps.label",
+                            "label": "الوصف",
+                            "icon": "sicon-format-text-alt",
+                            "multilanguage": true,
+                            "value": null,
+                            "required": false,
+                            "maxLength": 20,
+                            "description": "مثال: ماتشا"
+                        }
+                    ],
+                    "value": [
+                        {
+                            "steps.icon": "spoon",
+                            "steps.value": "2 جم",
+                            "steps.label": "ماتشا"
+                        },
+                        {
+                            "steps.icon": "drop",
+                            "steps.value": "70 مل",
+                            "steps.label": "ماء"
+                        },
+                        {
+                            "steps.icon": "thermo",
+                            "steps.value": "80°",
+                            "steps.label": "حرارة"
+                        },
+                        {
+                            "steps.icon": "whisk",
+                            "steps.value": "15 ث",
+                            "steps.label": "اخفق"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "9e63b188-36b4-5389-aa07-11731a7041ca",
+            "title": {
+                "ar": "هُدوء · قصتنا",
+                "en": "Hudoo · Our story"
+            },
+            "icon": "sicon-book-open",
+            "path": "home.hd-story",
+            "fields": [
+                {
+                    "type": "string",
+                    "format": "image",
+                    "id": "image",
+                    "label": "الصورة",
+                    "icon": "sicon-image",
+                    "value": null,
+                    "required": false,
+                    "description": "أفقية 1600×1000 بكسل."
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "eyebrow",
+                    "label": "العنوان الصغير",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "قصتنا",
+                    "required": false,
+                    "maxLength": 40
+                },
+                {
+                    "type": "string",
+                    "format": "textarea",
+                    "id": "title",
+                    "label": "العنوان",
+                    "icon": "sicon-typography",
+                    "multilanguage": true,
+                    "value": "من مزارع أوجي المظلّلة،\nإلى كوبك في الرياض.",
+                    "required": false,
+                    "maxLength": 100
+                },
+                {
+                    "type": "string",
+                    "format": "textarea",
+                    "id": "text",
+                    "label": "النص",
+                    "icon": "sicon-typography",
+                    "multilanguage": true,
+                    "value": "نختار الماتشا من مزارع عائلية، ونطحنها بالحجر على دفعات صغيرة عشان توصلك طازجة.",
+                    "required": false,
+                    "maxLength": 260
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "link_text",
+                    "label": "نص الرابط (اختياري)",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": null,
+                    "required": false,
+                    "maxLength": 30
+                },
+                {
+                    "type": "items",
+                    "format": "variable-list",
+                    "id": "link",
+                    "label": "الرابط",
+                    "icon": "sicon-link",
+                    "value": [],
+                    "required": false,
+                    "searchable": true,
+                    "source": "custom",
+                    "sources": [
+                        {
+                            "label": "منتج",
+                            "key": "products",
+                            "value": "products"
+                        },
+                        {
+                            "label": "منتجات مع وسم",
+                            "key": "products_tags",
+                            "value": "products_tags"
+                        },
+                        {
+                            "label": "تصنيف",
+                            "key": "categories",
+                            "value": "categories"
+                        },
+                        {
+                            "label": "ماركة تجارية",
+                            "key": "brands",
+                            "value": "brands"
+                        },
+                        {
+                            "label": "صفحة تعريفية",
+                            "key": "pages",
+                            "value": "pages"
+                        },
+                        {
+                            "label": "مقالة",
+                            "key": "blog_articles",
+                            "value": "blog_articles"
+                        },
+                        {
+                            "label": "تصنيف ضمن المدونة",
+                            "key": "blog_categories",
+                            "value": "blog_categories"
+                        },
+                        {
+                            "label": "التخفيضات",
+                            "key": "offers_link",
+                            "value": "offers_link"
+                        },
+                        {
+                            "label": "الماركات التجارية",
+                            "key": "brands_link",
+                            "value": "brands_link"
+                        },
+                        {
+                            "label": "المدونة",
+                            "key": "blog_link",
+                            "value": "blog_link"
+                        },
+                        {
+                            "label": "رابط خارجي",
+                            "key": "custom",
+                            "value": "custom"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "7324c1fc-07d4-5afe-ae6d-5c1e2bf39f05",
+            "title": {
+                "ar": "هُدوء · وصفة",
+                "en": "Hudoo · Recipe"
+            },
+            "icon": "sicon-chef-hat",
+            "path": "home.hd-recipe",
+            "fields": [
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "section_title",
+                    "label": "عنوان القسم",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "وصفة الأسبوع",
+                    "required": false,
+                    "maxLength": 40
+                },
+                {
+                    "type": "string",
+                    "format": "image",
+                    "id": "image",
+                    "label": "الصورة",
+                    "icon": "sicon-image",
+                    "value": null,
+                    "required": false,
+                    "description": "1400×1200 بكسل تقريباً."
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "title",
+                    "label": "اسم الوصفة",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "ماتشا لاتيه مثلّج",
+                    "required": false,
+                    "maxLength": 60
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "meta",
+                    "label": "تفاصيل قصيرة",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": "5 دقائق · 3 مكونات · بريميوم",
+                    "required": false,
+                    "maxLength": 80
+                },
+                {
+                    "type": "items",
+                    "format": "dropdown-list",
+                    "id": "products",
+                    "label": "مكونات الوصفة (منتجات)",
+                    "icon": "sicon-packed-box",
+                    "source": "products",
+                    "searchable": true,
+                    "multichoice": true,
+                    "selected": [],
+                    "options": [],
+                    "value": [],
+                    "required": false,
+                    "minLength": 0,
+                    "maxLength": 6,
+                    "description": "زر «أضف مكونات الوصفة للسلة» يضيفها كلها."
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "button_text",
+                    "label": "نص الزر",
+                    "icon": "sicon-format-text-alt",
+                    "multilanguage": true,
+                    "value": null,
+                    "required": false,
+                    "maxLength": 40,
+                    "description": "فارغ = النص الافتراضي."
+                },
+                {
+                    "type": "items",
+                    "format": "variable-list",
+                    "id": "link",
+                    "label": "رابط الوصفة الكاملة",
+                    "icon": "sicon-link",
+                    "value": [],
+                    "required": false,
+                    "searchable": true,
+                    "source": "custom",
+                    "sources": [
+                        {
+                            "label": "منتج",
+                            "key": "products",
+                            "value": "products"
+                        },
+                        {
+                            "label": "منتجات مع وسم",
+                            "key": "products_tags",
+                            "value": "products_tags"
+                        },
+                        {
+                            "label": "تصنيف",
+                            "key": "categories",
+                            "value": "categories"
+                        },
+                        {
+                            "label": "ماركة تجارية",
+                            "key": "brands",
+                            "value": "brands"
+                        },
+                        {
+                            "label": "صفحة تعريفية",
+                            "key": "pages",
+                            "value": "pages"
+                        },
+                        {
+                            "label": "مقالة",
+                            "key": "blog_articles",
+                            "value": "blog_articles"
+                        },
+                        {
+                            "label": "تصنيف ضمن المدونة",
+                            "key": "blog_categories",
+                            "value": "blog_categories"
+                        },
+                        {
+                            "label": "التخفيضات",
+                            "key": "offers_link",
+                            "value": "offers_link"
+                        },
+                        {
+                            "label": "الماركات التجارية",
+                            "key": "brands_link",
+                            "value": "brands_link"
+                        },
+                        {
+                            "label": "المدونة",
+                            "key": "blog_link",
+                            "value": "blog_link"
+                        },
+                        {
+                            "label": "رابط خارجي",
+                            "key": "custom",
+                            "value": "custom"
+                        }
+                    ],
+                    "description": "يُستخدم إذا لم تختر منتجات (مثلاً مقالة في المدونة)."
+                }
+            ]
+        },
         {
             "key": "186b3f4f-25cf-4d3c-abca-cef7eed6f0ab",
             "title": {

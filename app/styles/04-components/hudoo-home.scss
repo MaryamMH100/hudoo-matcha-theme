@@ -1,0 +1,527 @@
+/* =========================================================================
+   Hudoo home blocks — Figma «03 · Theme – Mobile → 01 · Home».
+   Markup: app/components/home/hudoo/*.tsx. Mobile first (390px frames),
+   then a calmer, wider layout from `lg` (content max ~1200px).
+   ========================================================================= */
+
+/* The sections carry their own Figma spacing; drop the generic block margin. */
+.s-block[class*='s-block--hd-'] {
+  margin-top: 0;
+}
+
+/* ---- shared: section head ------------------------------------------- */
+.hd-section-head {
+  @apply mb-[18px] flex flex-col gap-[18px] lg:mb-7;
+
+  &.has-action {
+    @apply flex-row items-end justify-between gap-4;
+  }
+
+  &__text {
+    @apply flex flex-col gap-[14px];
+  }
+
+  &__title {
+    @apply m-0 text-[28px] lg:text-[40px];
+    line-height: 1.35;
+  }
+
+  &--dark &__title {
+    color: var(--hd-on-primary);
+  }
+}
+
+.hd-view-all {
+  @apply inline-flex min-h-[44px] shrink-0 items-center gap-1 text-[13px] font-medium;
+  color: var(--hd-primary);
+
+  &:hover {
+    color: var(--hd-deep);
+  }
+}
+
+/* ---- Hero (390 × 600) ------------------------------------------------- */
+.hd-hero {
+  @apply relative isolate flex min-h-[600px] flex-col justify-end overflow-hidden;
+  color: var(--hd-on-primary);
+
+  &__media {
+    @apply absolute inset-0 -z-10;
+  }
+
+  &__img {
+    @apply h-full w-full object-cover;
+  }
+
+  &__shade {
+    @apply absolute inset-0;
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--hd-deep) 0%, transparent) 35%,
+      color-mix(in srgb, var(--hd-deep) 90%, transparent)
+    );
+  }
+
+  &__content {
+    @apply flex flex-col items-start gap-[14px] px-[22px] pb-7;
+  }
+
+  &__badge {
+    @apply m-0 rounded-full px-3 py-1.5 text-xs font-semibold;
+    background-color: var(--hd-highlight);
+    color: var(--hd-deep);
+  }
+
+  &__title {
+    @apply m-0 whitespace-pre-line text-[46px];
+    line-height: 1.25;
+    color: var(--hd-on-primary);
+  }
+
+  &__text {
+    @apply m-0 max-w-md text-[14.5px];
+    line-height: 1.65;
+  }
+
+  &__actions {
+    @apply flex flex-wrap gap-2.5 pt-1.5;
+
+    .hd-btn {
+      @apply min-h-[48px] px-5 text-sm;
+    }
+  }
+
+  /* Desktop: split — text on the canvas, the photo as a tall rounded card. */
+  @media (min-width: 1024px) {
+    @apply mx-auto grid min-h-0 grid-cols-2 items-center gap-12 py-12;
+    max-width: calc(var(--hd-content-max) + 2.5rem);
+    padding-inline: 1.25rem;
+    color: var(--hd-text);
+
+    &__media {
+      @apply relative inset-auto z-auto order-2 h-[620px] overflow-hidden;
+      border-radius: var(--hd-radius-card-lg);
+    }
+
+    &__shade {
+      display: none;
+    }
+
+    &__content {
+      @apply order-1 gap-5 p-0;
+    }
+
+    &__title {
+      @apply text-[64px];
+      color: var(--hd-deep);
+    }
+
+    &__text {
+      @apply text-base;
+      color: var(--hd-muted);
+    }
+
+    .hd-btn--ghost-light {
+      color: var(--hd-deep);
+      box-shadow: inset 0 0 0 1.2px var(--hd-deep);
+    }
+
+    .hd-btn--light {
+      background-color: var(--hd-primary);
+      color: var(--hd-on-primary);
+
+      &:hover {
+        background-color: var(--hd-deep);
+      }
+    }
+  }
+}
+
+/* ---- Trust strip (390 × 54, hairline under) --------------------------- */
+.hd-trust {
+  border-bottom: 1px solid var(--hd-line);
+
+  &__list {
+    @apply m-0 flex list-none items-center justify-between gap-3 px-5 py-[18px] lg:mx-auto lg:justify-center lg:gap-16;
+    max-width: calc(var(--hd-content-max) + 2.5rem);
+  }
+
+  &__item {
+    @apply flex items-center gap-1.5 text-xs font-medium lg:text-sm;
+    color: var(--hd-deep);
+  }
+
+  &__icon {
+    @apply h-[18px] w-[18px] shrink-0;
+    color: var(--hd-primary);
+  }
+}
+
+/* ---- Grade Finder ----------------------------------------------------- */
+.hd-grade {
+  @apply pb-2 pt-10 lg:py-20;
+  scroll-margin-top: 72px;
+
+  &__inner {
+    @apply flex flex-col gap-[18px] lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start lg:gap-12;
+  }
+
+  &__intro {
+    @apply flex flex-col lg:sticky lg:top-28;
+
+    .hd-section-head {
+      @apply mb-[18px];
+    }
+
+    .hd-section-head__title {
+      @apply text-[30px] lg:text-[44px];
+    }
+  }
+
+  &__card {
+    @apply flex flex-col gap-[18px] overflow-hidden pb-[22px];
+    background-color: var(--hd-surface);
+    border-radius: var(--hd-radius-card-lg);
+
+    @media (min-width: 768px) {
+      @apply grid grid-cols-2 gap-0 pb-0;
+    }
+  }
+
+  &__photo {
+    @apply relative h-[250px] md:h-auto md:min-h-[460px];
+  }
+
+  &__img {
+    @apply absolute inset-0 h-full w-full object-cover opacity-0;
+    transition: opacity 0.35s ease;
+
+    &.is-active {
+      @apply opacity-100;
+    }
+  }
+
+  &__badge {
+    @apply absolute top-3.5 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11.5px] font-medium;
+    inset-inline-start: 14px;
+    background-color: var(--hd-surface);
+    color: var(--hd-text);
+  }
+
+  &__badge-dot {
+    @apply h-2 w-2 rounded-full;
+    background-color: var(--grade-color);
+  }
+
+  &__body {
+    @apply flex flex-col gap-4 px-5 md:justify-center md:p-8;
+  }
+
+  &__name {
+    @apply m-0 text-[28px] lg:text-[34px];
+  }
+
+  &__desc {
+    @apply m-0 mt-1 text-[13.5px] lg:text-[15px];
+    line-height: 1.6;
+    color: var(--hd-muted);
+  }
+
+  &__tastes {
+    @apply m-0 grid grid-cols-3 gap-2.5;
+  }
+
+  &__taste {
+    @apply flex flex-col items-start gap-2 p-3;
+    background-color: var(--hd-bg);
+    border-radius: 14px;
+
+    dt {
+      @apply text-xs;
+      color: var(--hd-muted);
+    }
+
+    dd {
+      @apply m-0;
+    }
+  }
+
+  &__cta {
+    @apply min-h-[52px] w-full;
+  }
+}
+
+/* Segmented control — surface pill with a line border; the active tab is deep. */
+.hd-segmented {
+  @apply flex gap-1 rounded-full p-1;
+  background-color: var(--hd-surface);
+  box-shadow: inset 0 0 0 1px var(--hd-line);
+
+  &__tab {
+    @apply flex min-h-[44px] flex-1 items-center justify-center rounded-full px-2 text-[13px] transition-colors;
+    color: var(--hd-muted);
+
+    &:hover {
+      color: var(--hd-deep);
+    }
+
+    &.is-active {
+      @apply font-semibold;
+      background-color: var(--hd-deep);
+      color: var(--hd-on-primary);
+    }
+  }
+}
+
+/* Colour scale: vivid green (ceremonial) at the start → olive (culinary) at the end. */
+.hd-spectrum {
+  @apply flex flex-col gap-2;
+
+  &__label {
+    @apply m-0 text-xs font-medium;
+    color: var(--hd-muted);
+  }
+
+  &__track {
+    @apply relative h-[22px];
+
+    &::before {
+      content: '';
+      @apply absolute inset-x-0 top-1/2 h-2.5 -translate-y-1/2 rounded-[5px];
+      background: linear-gradient(
+        to left,
+        var(--hd-grade-ceremonial),
+        var(--hd-grade-premium),
+        var(--hd-grade-culinary)
+      );
+    }
+
+    [dir='ltr'] &::before {
+      background: linear-gradient(
+        to right,
+        var(--hd-grade-ceremonial),
+        var(--hd-grade-premium),
+        var(--hd-grade-culinary)
+      );
+    }
+  }
+
+  &__marker {
+    @apply absolute top-1/2 h-[22px] w-[22px] -translate-y-1/2 rounded-full;
+    margin-inline-start: -11px;
+    background-color: var(--grade-color);
+    box-shadow:
+      0 0 0 4px var(--hd-surface),
+      0 4px 10px rgb(0 0 0 / 0.18);
+    transition: inset-inline-start 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &__ends {
+    @apply flex justify-between text-[11px];
+    color: var(--hd-muted);
+  }
+}
+
+.hd-dots {
+  @apply flex gap-1;
+
+  &__dot {
+    @apply h-2 w-2 rounded-full;
+    background-color: var(--hd-line);
+
+    &.is-on {
+      background-color: var(--hd-primary);
+    }
+  }
+}
+
+/* ---- Products rail ---------------------------------------------------- */
+.hd-rail {
+  @apply pt-11 lg:pt-20;
+
+  &__track {
+    @apply m-0 flex list-none gap-3 overflow-x-auto px-5 pb-2;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 20px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      @apply mx-auto gap-5;
+      max-width: calc(var(--hd-content-max) + 2.5rem);
+    }
+  }
+
+  &__slide {
+    @apply w-[168px] shrink-0 sm:w-[200px] lg:w-[calc((100%-4*1.25rem)/5)] lg:min-w-[200px];
+    scroll-snap-align: start;
+  }
+}
+
+/* ---- Ritual kit ------------------------------------------------------- */
+.hd-kit {
+  @apply pt-11 lg:pt-20;
+
+  &__card {
+    @apply flex min-h-[198px] overflow-hidden lg:min-h-[320px];
+    background-color: var(--hd-deep);
+    border-radius: var(--hd-radius-card-lg);
+    color: var(--hd-on-primary);
+    transition: box-shadow 0.25s ease;
+
+    &:is(a):hover {
+      box-shadow: var(--hd-shadow-lift);
+    }
+  }
+
+  &__photo {
+    @apply relative w-[140px] shrink-0 self-stretch sm:w-[220px] lg:w-[42%];
+  }
+
+  &__img {
+    @apply absolute inset-0 h-full w-full object-cover;
+  }
+
+  &__body {
+    @apply flex min-w-0 flex-1 flex-col justify-center gap-2.5 px-5 py-[22px] lg:gap-4 lg:px-12;
+  }
+
+  &__eyebrow {
+    @apply m-0 text-xs font-semibold;
+    color: var(--hd-highlight);
+  }
+
+  &__title {
+    @apply m-0 text-[26px] lg:text-[40px];
+    line-height: 1.3;
+    color: var(--hd-on-primary);
+  }
+
+  &__text {
+    @apply m-0 text-[12.5px] lg:text-sm;
+  }
+
+  &__price {
+    @apply m-0 flex items-center gap-2 pt-1.5;
+  }
+
+  &__now {
+    @apply text-[15px] font-semibold;
+  }
+
+  &__was {
+    @apply text-xs;
+    color: var(--hd-line);
+  }
+}
+
+/* ---- Brew guide ------------------------------------------------------- */
+.hd-brew {
+  @apply pt-12 lg:pt-20;
+
+  &__steps {
+    @apply m-0 grid list-none grid-cols-4 gap-2 p-0 lg:gap-5;
+  }
+
+  &__step {
+    @apply flex flex-col items-center gap-1.5 px-1.5 py-4 text-center lg:gap-2 lg:py-8;
+    background-color: var(--hd-surface);
+    border-radius: var(--hd-radius-sm);
+  }
+
+  &__icon {
+    @apply mb-0.5 flex h-[42px] w-[42px] items-center justify-center rounded-full lg:h-14 lg:w-14;
+    background-color: var(--hd-bg);
+    color: var(--hd-primary);
+  }
+
+  &__value {
+    @apply text-base font-semibold lg:text-xl;
+    color: var(--hd-deep);
+  }
+
+  &__label {
+    @apply text-[11.5px] lg:text-sm;
+    color: var(--hd-muted);
+  }
+}
+
+/* ---- Story (full bleed, 390 × 460) ------------------------------------ */
+.hd-story {
+  @apply relative isolate mt-12 flex min-h-[460px] items-end overflow-hidden lg:mt-20 lg:min-h-[560px];
+  color: var(--hd-on-primary);
+
+  &__img {
+    @apply absolute inset-0 -z-10 h-full w-full object-cover;
+  }
+
+  &__shade {
+    @apply absolute inset-0 -z-10;
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--hd-deep) 5%, transparent) 20%,
+      color-mix(in srgb, var(--hd-deep) 88%, transparent)
+    );
+  }
+
+  &__content {
+    @apply flex flex-col items-start gap-3 pb-[30px] lg:pb-16;
+    padding-inline: 22px;
+  }
+
+  &__title {
+    @apply m-0 max-w-xl text-[30px] lg:text-[48px];
+    line-height: 1.35;
+    color: var(--hd-on-primary);
+  }
+
+  &__text {
+    @apply m-0 max-w-xl text-[13.5px] lg:text-base;
+    line-height: 1.65;
+  }
+
+  &__link {
+    @apply mt-2;
+  }
+}
+
+/* ---- Recipe ----------------------------------------------------------- */
+.hd-recipe {
+  @apply pt-11 lg:pt-20;
+
+  &__card {
+    @apply flex flex-col overflow-hidden md:grid md:grid-cols-2;
+    background-color: var(--hd-surface);
+    border-radius: var(--hd-radius-card-lg);
+  }
+
+  &__photo {
+    @apply relative h-[300px] md:h-auto md:min-h-[420px];
+  }
+
+  &__img {
+    @apply absolute inset-0 h-full w-full object-cover;
+  }
+
+  &__body {
+    @apply flex flex-col items-start gap-2.5 p-5 md:justify-center md:gap-4 md:p-10;
+  }
+
+  &__title {
+    @apply m-0 text-2xl lg:text-[34px];
+  }
+
+  &__meta {
+    @apply m-0 text-[12.5px] lg:text-sm;
+    color: var(--hd-muted);
+    word-spacing: 0.15em;
+  }
+
+  &__cta {
+    @apply mt-1 min-h-[46px] w-full md:w-auto;
+    box-shadow: inset 0 0 0 1.2px var(--hd-deep);
+  }
+}

@@ -18,10 +18,16 @@ body {
   color: var(--hd-deep);
 }
 
-/* Small "eyebrow" label above a section title (e.g. «دليل الدرجات»). */
+/* Small "eyebrow" label above a section title (Figma: «دليل الدرجات», «الطريقة»):
+   12px semibold, accent colour, slight tracking. `--light` on dark photos. */
 .hd-eyebrow {
-  @apply text-xs font-medium tracking-wide;
-  color: var(--hd-primary);
+  @apply m-0 text-xs font-semibold;
+  letter-spacing: 0.04em;
+  color: var(--hd-accent);
+
+  &--light {
+    color: var(--hd-highlight);
+  }
 }
 
 /* Content width: ~1200px on desktop, 20px gutters on phones (Figma). */
@@ -61,11 +67,43 @@ body {
   &--light {
     background-color: var(--hd-surface);
     color: var(--hd-deep);
+    @apply font-semibold;
 
     &:hover {
       background-color: var(--hd-highlight);
+      color: var(--hd-deep);
     }
   }
+
+  /* White outline on a dark photo (hero «اعرفي الدرجات»). */
+  &--ghost-light {
+    background-color: transparent;
+    color: var(--hd-on-primary);
+    box-shadow: inset 0 0 0 1.2px var(--hd-on-primary);
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--hd-on-primary) 14%, transparent);
+    }
+  }
+
+  &--deep {
+    background-color: var(--hd-deep);
+    @apply font-semibold;
+
+    &:hover {
+      background-color: var(--hd-primary);
+    }
+  }
+
+  &:disabled,
+  &[aria-busy='true'] {
+    @apply cursor-wait opacity-60;
+  }
+}
+
+/* "Forward" arrow from Figma points left (Arabic); mirror it in English. */
+[dir='ltr'] .hd-icon--forward {
+  transform: scaleX(-1);
 }
 
 /* Small rounded tag, e.g. «الحصاد الأول». */

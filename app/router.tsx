@@ -28,6 +28,16 @@ import {
   FeaturedProductsWithSpecialProduct,
 } from './components/home/FeaturedProducts';
 import { PhotosSliderWithText } from './components/home/PhotosSliderWithText';
+import {
+  HudooBrewGuide,
+  HudooGradeFinder,
+  HudooHero,
+  HudooProductsRail,
+  HudooRecipe,
+  HudooRitualKit,
+  HudooStory,
+  HudooTrustStrip,
+} from './components/home/hudoo';
 import { registerThemeHooks } from './hooks';
 import { ProductListSkeleton } from './components/product/ProductListSkeleton';
 
@@ -77,12 +87,31 @@ registerHomeComponents({
   'slider-products-with-header': SliderProductsWithHeader,
   'enhanced-square-banners': EnhancedSquareBanners,
   blog: Blog,
+  // Hudoo home blocks (twilight.json `home.hd-*`).
+  'hd-hero': HudooHero,
+  'hd-trust': HudooTrustStrip,
+  'hd-grade-finder': HudooGradeFinder,
+  'hd-products-rail': HudooProductsRail,
+  'hd-ritual-kit': HudooRitualKit,
+  'hd-brew-guide': HudooBrewGuide,
+  'hd-story': HudooStory,
+  'hd-recipe': HudooRecipe,
 });
 
 // Wrapper `<section>` classes for `featured-products` — the engine only styles
 // the literal `styleN` values; this covers the semantic `view_style`s too.
 // `custom-testimonials` gets `s-block--full-bg` so the gray band runs edge-to-edge.
 registerHomeComponentConfig({
+  // Hudoo blocks: reserve roughly their loaded height so the page doesn't jump
+  // (blocks after the third mount when scrolled into view).
+  'hd-hero': { height: 'min(600px, 92vh)', className: 's-block s-block--hd-hero s-block--full-bg' },
+  'hd-trust': { height: '54px', className: 's-block s-block--hd-trust' },
+  'hd-grade-finder': { height: '820px', className: 's-block s-block--hd-grade' },
+  'hd-products-rail': { height: '404px', className: 's-block s-block--hd-rail' },
+  'hd-ritual-kit': { height: '242px', className: 's-block s-block--hd-kit' },
+  'hd-brew-guide': { height: '268px', className: 's-block s-block--hd-brew' },
+  'hd-story': { height: '460px', className: 's-block s-block--hd-story s-block--full-bg' },
+  'hd-recipe': { height: '620px', className: 's-block s-block--hd-recipe' },
   'featured-products': featuredProductsConfig,
   'featured-products-special-offer': featuredProductsConfig,
   'featured-products-special-product': featuredProductsConfig,
