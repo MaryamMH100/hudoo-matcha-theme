@@ -28,10 +28,6 @@ vi.mock('../../../app/components/layout/ImportantLinksSheet', () => ({
 vi.mock('../../../app/components/layout/MobileAccountSheet', () => ({
   MobileAccountSheet: () => null,
 }));
-vi.mock('../../../app/components/layout/MobileBottomBar', () => ({ MobileBottomBar: () => null }));
-vi.mock('../../../app/components/layout/MobilePageTitleBar', () => ({
-  MobilePageTitleBar: () => null,
-}));
 
 /**
  * A `salla.lang` stand-in. `subscribe` keeps the listener, as the SDK does, so

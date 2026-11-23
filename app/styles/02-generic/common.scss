@@ -260,9 +260,7 @@ salla-localization-modal {
 }
 
 /* On mobile every `salla-modal` (appended to <body>, e.g. the language /
-   currency picker) renders as a bottom sheet. The mobile bottom bar
-   (`.mobile-bottom-bar`, z-220) would otherwise paint over its lower rows,
-   so lift the whole modal above the bar. */
+   currency picker) renders as a bottom sheet, lifted above every drawer. */
 @media (max-width: 767px) {
   .s-modal-container {
     @apply z-[999];
@@ -278,9 +276,7 @@ salla-localization-modal {
      container; on mobile the body *is* the bottom sheet's own surface, so
      the backdrop dims straight through it, washing out the search box and
      every suggestion row behind it. `!important` to beat the SDK rule's own
-     specificity -- same reasoning as `mobile-bottom-bar.scss`'s existing
-     `#{!important}` overrides for the same "beat a rule from outside this
-     theme" situation. */
+     specificity. */
   .s-search-modal .s-modal-body {
     background-color: #fff;
     margin: 0;

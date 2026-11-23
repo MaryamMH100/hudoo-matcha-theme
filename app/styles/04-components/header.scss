@@ -21,7 +21,7 @@
    content starts below the status bar. It stays stuck to the top (the header is
    `display: contents`, so its containing block is the whole page column), so the
    page never shows behind the status bar while it scrolls; the pinned bar, the
-   mobile page-title bar and the catalog toolbar sit right under it
+   catalog toolbar sits right under it
    (`top: var(--app-safe-area-top)`). 0px tall in a browser. Above the pinned bar
    (z-40), below the drawers and sheets (z-200 and up). */
 .site-header__safe-area {
@@ -81,59 +81,13 @@
   @apply flex items-center sm:gap-1.5 lg:gap-4 justify-self-end;
 }
 
-/* Phones: the bottom nav (`mobile-bottom-bar.scss`) carries navigation, so the
-   header is pared right back on the home page — logo + menu + search only, no
-   cart / user menu — and hidden on every other page. Keyed on
-   `.site-header--home` (`Header.tsx`, route match — present in the SSR HTML),
-   not `body.index`, which the engine only adds after hydration.
-
-   "Hidden" collapses the bar rather than `display: none`-ing the whole
-   `.site-header`: the `<salla-user-menu>` lives in there, and the bottom nav's
-   Account tab opens its (position: fixed) bottom sheet by clicking its trigger.
-   The opened dropdown re-asserts `visibility` and sits fixed, so it escapes. */
+/* Phones: Hudoo has no bottom bar, so the full header (menu · logo · search ·
+   bag) shows on every page. The account lives in the menu drawer
+   ("My account" → account sheet), so the user-menu is taken out of the visible
+   bar but stays mounted. No `opacity`/`display:none` — either would also kill
+   its position:fixed dropdown. */
 @media (max-width: 767px) {
-  /* `.site-header--product` (`Header.tsx`) covers the same case from route
-     match state instead of the `body` route class — during a pending
-     navigation *into* the product page the body class can still read the
-     previous route for a moment, leaving this collapse un-applied until it
-     catches up. */
-  .site-header:not(.site-header--home),
-  .site-header--product {
-    .site-header__ad,
-    .site-header__intro {
-      display: none;
-    }
-
-    .site-header__bar-outer {
-      min-height: 0;
-    }
-
-    .site-header__bar {
-      height: 0;
-      overflow: hidden;
-      visibility: hidden;
-    }
-  }
-
-  /* The bottom nav's Categories tab already opens this same drawer
-     (MobileBottomBar.tsx → HeaderNav), so the header's own trigger is a
-     redundant second way to do it. Only the home page actually shows the bar
-     on mobile to begin with (every other route collapses it above); plain
-     `display: none` is fine here, unlike the dropdown below -- nothing about
-     this trigger needs to stay reachable off-screen. */
-  .site-header__nav-toggle button{
-    display: none;
-  }
-
-  /* Home: the bottom nav owns cart + account. Drop the cart icon; keep the
-     user-menu mounted (its bottom sheet still opens from the Account tab) but
-     take it out of the visible bar. No `opacity`/`display:none` — either would
-     also kill the position:fixed dropdown. */
-  .site-header--home .site-header__actions salla-cart-summary {
-    display: none;
-  }
-
-  .site-header--home .site-header__actions salla-user-menu {
+  .site-header__actions salla-user-menu {
     position: absolute;
     width: 0;
     height: 0;
@@ -149,14 +103,6 @@
      dropdown items, which keep their own (smaller) size. */
   svg:not(.s-user-menu-dropdown-item *) {
     @apply w-6 h-6;
-  }
-}
-
-/* Phones: the bottom bar (`mobile-bottom-bar.scss`, same breakpoint) has its
-   own search tab, so the header's search button goes. */
-@media (max-width: 767px) {
-  .header-action.site-header__search {
-    display: none;
   }
 }
 
@@ -272,8 +218,7 @@
 
   .site-header__actions .s-user-menu-dropdown {
     @apply absolute inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto overscroll-contain rounded-t bg-white shadow-2xl;
-    /* clear the mobile bottom bar, which sits on top (z-220) */
-    padding-bottom: calc(76px + var(--safe-bottom));
+    padding-bottom: calc(16px + var(--safe-bottom));
     transform: translateY(100%);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -488,9 +433,7 @@
     border-start-start-radius: 1rem;
     border-start-end-radius: 1rem;
     transform: translateY(100%);
-    /* the mobile bottom bar overlays the sheet (z-220); pad so the footer bar
-       and the last links clear it */
-    padding-bottom: calc(76px + var(--safe-bottom));
+    padding-bottom: calc(16px + var(--safe-bottom));
 
     /* grab handle */
     &::before {
@@ -1194,24 +1137,6 @@ body.topnav-is-dark .site-header--lite .site-header__bar {
   transform: none !important;
 }
 
-/* Phones, home page: Figma shows menu · logo · search · bag, so bring back the
-   three buttons the starter hides there for its bottom bar. */
-@media (max-width: 767px) {
-  .site-header--home {
-    .site-header__nav-toggle button {
-      display: inline-grid;
-    }
-
-    .header-action.site-header__search {
-      display: inline-grid;
-    }
-
-    .site-header__actions salla-cart-summary {
-      display: inline-block;
-    }
-  }
-}
-
 /* Drawer in brand colours */
 .site-nav-drawer {
   background-color: var(--hd-surface);
@@ -1224,4 +1149,20 @@ body.topnav-is-dark .site-header--lite .site-header__bar {
   &:hover {
     color: var(--hd-primary);
   }
+}
+
+/* Phones: "My account" / "Log in" row at the bottom of the drawer. */
+.site-nav-drawer__account {
+  @apply mx-4 mb-2 flex min-h-[48px] shrink-0 items-center gap-3 rounded-full px-4 text-start text-sm font-medium transition-colors;
+  background-color: var(--hd-bg);
+  color: var(--hd-deep);
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--hd-primary) 10%, var(--hd-bg));
+  }
+}
+
+.site-nav-drawer__account-icon {
+  @apply h-5 w-5 shrink-0;
+  color: var(--hd-primary);
 }

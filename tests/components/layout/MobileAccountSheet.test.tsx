@@ -97,17 +97,6 @@ vi.mock('@salla.sa/twilight-theme-engine/common', () => ({
   ),
 }));
 
-vi.mock('../../../app/components/layout/Footer', () => ({
-  Footer: ({ inSheet }: { inSheet?: boolean }) => (
-    <div data-in-sheet={String(!!inSheet)}>
-      <a href="/">Acme</a>
-      <a href="https://x.test/social" target="_blank" rel="noreferrer">
-        Social
-      </a>
-    </div>
-  ),
-}));
-
 /** Let the sheet's mount + two-frame enter transition settle inside act. */
 async function settle() {
   await act(async () => {
@@ -135,6 +124,12 @@ afterEach(() => {
 });
 
 describe('MobileAccountSheet', () => {
+  it('does not repeat the page footer (it shows on phones in Hudoo)', async () => {
+    renderSheet();
+    await settle();
+    expect(document.querySelector('.account-sheet .store-footer')).toBeNull();
+  });
+
   it('renders nothing while closed', () => {
     render(<MobileAccountSheet open={false} onClose={() => {}} onOpenImportantLinks={() => {}} />);
     expect(document.querySelector('.account-sheet')).toBeNull();
@@ -383,10 +378,7 @@ describe('MobileAccountSheet', () => {
     const onClose = renderSheet();
     await settle();
 
-    fireEvent.click(screen.getByText('Social'));
-    expect(onClose).not.toHaveBeenCalled();
-
-    fireEvent.click(screen.getByText('Acme'));
+    fireEvent.click(screen.getByText('Notifications'));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 

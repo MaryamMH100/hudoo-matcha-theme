@@ -143,11 +143,11 @@ function BrandHeader({ source }: { source: ProductListLoaderData['source'] }) {
   );
 }
 
-/** The mobile title bar's height (`.mobile-page-title`, `h-12`); the toolbar pins below it. */
-const TITLE_BAR_PX = 48;
+/** The pinned header bar's height on phones (`.site-header__bar.is-scrolled`, 56px); the toolbar pins below it. */
+const TITLE_BAR_PX = 56;
 
 /**
- * On phones the toolbar pins under the sticky title bar once it scrolls up to
+ * On phones the toolbar pins under the pinned header bar once it scrolls up to
  * it (`is-stuck`), slides out of view while the page scrolls down and back in
  * when it scrolls up (`is-hidden`). In its own place on the page it never
  * hides. A zero-height sentinel above it tells when it is pinned, as in
@@ -156,7 +156,7 @@ const TITLE_BAR_PX = 48;
  */
 function MobileStickyToolbar({ children }: { children: ReactNode }) {
   const sentinelRef = useRef<HTMLDivElement>(null);
-  // Inside the Salla app the title bar sits below the status bar.
+  // Inside the Salla app the header bar sits below the status bar.
   const safeTop = useAppSafeAreaTop();
   const direction = useScrollDirection();
   const [stuck, setStuck] = useState(false);

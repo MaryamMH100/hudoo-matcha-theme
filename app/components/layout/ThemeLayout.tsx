@@ -9,8 +9,6 @@ import { Footer } from './Footer';
 import { Header } from './Header';
 import { ImportantLinksSheet } from './ImportantLinksSheet';
 import { MobileAccountSheet } from './MobileAccountSheet';
-import { MobileBottomBar } from './MobileBottomBar';
-import { MobilePageTitleBar } from './MobilePageTitleBar';
 import { ThemeTokens } from './ThemeTokens';
 import { fillComponentTranslations, type ComponentLang } from '../../lib/componentTranslations';
 
@@ -129,20 +127,17 @@ function GlobalModals() {
 
 export function ThemeLayout({ children }: ThemeLayoutProps) {
   const { theme } = useTwilight();
-  // Owned here so the header's nav drawer and the mobile bottom bar's Categories
-  // tab drive the same slide-in panel.
+  // Owned here so the drawer's "My account" row can close it and open the sheet.
   const [navOpen, setNavOpen] = useState(false);
-  // The mobile bottom bar's My Account tab opens this sheet (the customer's
-  // links, settings, contacts and the footer widgets, which the page footer
-  // doesn't show on mobile).
+  // The drawer's "My account" row opens this sheet on phones (the customer's
+  // links, settings and contacts). Hudoo has no mobile bottom bar.
   const [accountOpen, setAccountOpen] = useState(false);
   // Its own "Important links" row opens this one in turn -- a second
   // full-screen sheet for the footer menu, not a drill-in within the first.
   const [importantLinksOpen, setImportantLinksOpen] = useState(false);
 
-  // Close every sheet/drawer on any route change — a bottom-bar tab (Home,
-  // Cart) or a link inside one of them navigates without touching their own
-  // state, so they would otherwise stay open over the new page.
+  // Close every sheet/drawer on any route change — a link inside one of them
+  // navigates without touching their own state.
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   useEffect(() => {
     setNavOpen(false);
@@ -172,8 +167,14 @@ export function ThemeLayout({ children }: ThemeLayoutProps) {
         className={`app-inner flex flex-col min-h-full product-card-img--${imgRatio}${squarePhotos}`}
         suppressHydrationWarning
       >
-        <Header navOpen={navOpen} onNavOpenChange={setNavOpen} />
-        <MobilePageTitleBar />
+        <Header
+          navOpen={navOpen}
+          onNavOpenChange={setNavOpen}
+          onOpenAccount={() => {
+            setNavOpen(false);
+            setAccountOpen(true);
+          }}
+        />
         <main id="main-content" className="flex-1">
           {children}
         </main>
@@ -182,15 +183,6 @@ export function ThemeLayout({ children }: ThemeLayoutProps) {
             to `.store-footer` (a "recently viewed" section on agran): inside a boundary still
             waiting, React found their nodes, failed to hydrate (React #418) and dropped them. */}
         <Footer />
-        <MobileBottomBar
-          navOpen={navOpen}
-          onOpenNav={() => setNavOpen(true)}
-          onCloseNav={() => setNavOpen(false)}
-          accountOpen={accountOpen}
-          onAccountOpenChange={setAccountOpen}
-          secondSheetOpen={importantLinksOpen}
-          onCloseSecondSheet={() => setImportantLinksOpen(false)}
-        />
       </div>
 
       <MobileAccountSheet

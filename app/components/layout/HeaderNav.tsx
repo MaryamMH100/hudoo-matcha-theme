@@ -14,6 +14,7 @@ import { createPortal } from 'react-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { useTwilight } from '@salla.sa/twilight-theme-engine/providers';
+import { useUser } from '@salla.sa/twilight-theme-engine/hooks/useUser';
 import { Image, Link } from '@salla.sa/twilight-theme-engine/common';
 import { menu } from '@salla.sa/twilight-theme-engine/api/menu';
 import type { MenuItem } from '@salla.sa/twilight-theme-engine/types';
@@ -29,6 +30,7 @@ import {
   MapPinIcon,
   Money01Icon,
   NoteIcon,
+  UserIcon,
 } from '../icons';
 import { useDialogFocus } from '../../hooks/useDialogFocus';
 import { useScrollLock } from '../../hooks/useScrollLock';
@@ -40,6 +42,8 @@ import { pruneUntitled } from '../../lib/menuOverflow';
 interface HeaderNavProps {
   open: boolean;
   onClose: () => void;
+  /** Phones: opens the "My account" sheet (there is no bottom bar in Hudoo). */
+  onOpenAccount?: () => void;
 }
 
 /** Keep in sync with the panel transition in `header.scss`. */
@@ -429,7 +433,7 @@ function useDrawerTransition(open: boolean) {
  * `menus/header`, so the merchant dashboard drives it unchanged. Styling:
  * `04-components/header.scss`.
  */
-export const HeaderNav = memo(function HeaderNav({ open, onClose }: HeaderNavProps) {
+export const HeaderNav = memo(function HeaderNav({ open, onClose, onOpenAccount }: HeaderNavProps) {
   const { data: rawItems = [] } = useQuery(menu.queries.header());
   const items = useMemo(() => pruneUntitled(rawItems), [rawItems]);
 
@@ -444,6 +448,7 @@ export const HeaderNav = memo(function HeaderNav({ open, onClose }: HeaderNavPro
       entered={entered}
       itemsIn={itemsIn}
       onClose={onClose}
+      onOpenAccount={onOpenAccount}
     />
   );
 });
@@ -454,6 +459,23 @@ interface HeaderNavDrawerProps {
   entered: boolean;
   itemsIn: boolean;
   onClose: () => void;
+  onOpenAccount?: () => void;
+}
+
+/** Phones only: a "My account" row (or "Log in" for guests) that opens the account sheet. */
+function NavAccountRow({ onOpenAccount }: { onOpenAccount: () => void }) {
+  const { t } = useTranslation();
+  const { isLoggedIn } = useUser();
+  return (
+    <button type="button" className="site-nav-drawer__account md:hidden" onClick={onOpenAccount}>
+      <UserIcon className="site-nav-drawer__account-icon" aria-hidden="true" />
+      <span>
+        {isLoggedIn
+          ? t('common.titles.my_account', 'My Account')
+          : t('blocks.header.login', 'Login')}
+      </span>
+    </button>
+  );
 }
 
 /**
@@ -462,7 +484,14 @@ interface HeaderNavDrawerProps {
  * root column. That replaces an effect that reset the trail whenever `open`
  * flipped, which cost an extra render with the old trail first.
  */
-function HeaderNavDrawer({ items, rootRef, entered, itemsIn, onClose }: HeaderNavDrawerProps) {
+function HeaderNavDrawer({
+  items,
+  rootRef,
+  entered,
+  itemsIn,
+  onClose,
+  onOpenAccount,
+}: HeaderNavDrawerProps) {
   const { t } = useTranslation();
   const drawerRef = useRef<HTMLDivElement>(null);
   // On phones the viewport is the single scroller for the whole column stack.
@@ -561,6 +590,7 @@ function HeaderNavDrawer({ items, rootRef, entered, itemsIn, onClose }: HeaderNa
           onOpenChild={openChild}
           onClose={onClose}
         />
+        {onOpenAccount && <NavAccountRow onOpenAccount={onOpenAccount} />}
         <NavFooter onClose={onClose} entered={itemsIn} />
       </div>
     </div>,

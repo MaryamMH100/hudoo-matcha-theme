@@ -1,11 +1,10 @@
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { MouseEvent, ReactNode } from 'react';
 import { SallaUserMenu } from '@salla.sa/twilight-components-react/user-menu';
 import { Pulse } from '@salla.sa/twilight-components-react/skeletons';
 import { useTwilight } from '@salla.sa/twilight-theme-engine/providers';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { useUser } from '@salla.sa/twilight-theme-engine/hooks/useUser';
-import { Footer } from './Footer';
 import { BottomSheet } from '../common';
 import { useCloseOnDesktop } from '../../hooks/useCloseOnDesktop';
 import { ROWS_IN_DELAY_MS, useStaggeredRows } from '../../hooks/useStaggeredRows';
@@ -321,16 +320,15 @@ function ContactsList() {
 }
 
 /**
- * Full-height "My Account" sheet the mobile bottom bar's account tab opens.
+ * Full-height "My Account" sheet, opened from the menu drawer's "My account" row on phones.
  * The customer's own links first (or a login card for a guest), then two card groups --
  * settings (language, currency, branch, important links) then
  * contacts (telegram, email, mobile, phone, WhatsApp, each conditional on the
- * merchant actually having set it) -- followed by the same footer widgets
- * (logo, description, social, tax / SBC / trust badges, footer menu, app
- * buttons, copyright, payments) the page footer itself hides on mobile.
+ * merchant actually having set it). The page footer shows on phones too, so the
+ * sheet doesn't repeat its widgets.
  *
- * Mounted once in {@link ThemeLayout}, which owns `open` and shares it with
- * {@link MobileBottomBar}. Styling: `04-components/mobile-account-sheet.scss`.
+ * Mounted once in {@link ThemeLayout}, which owns `open`.
+ * Styling: `04-components/mobile-account-sheet.scss`.
  */
 export function MobileAccountSheet({ open, onClose, onOpenImportantLinks }: MobileAccountSheetProps) {
   const { t } = useTranslation();
@@ -371,9 +369,6 @@ export function MobileAccountSheet({ open, onClose, onOpenImportantLinks }: Mobi
         {isLoggedIn ? <UserMenuCard open={open} /> : <LoginCard onClose={onClose} />}
         <SettingsList onClose={onClose} onOpenImportantLinks={onOpenImportantLinks} />
         <ContactsList />
-        <Suspense fallback={null}>
-          <Footer inSheet />
-        </Suspense>
       </div>
     </BottomSheet>
   );

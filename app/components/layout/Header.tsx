@@ -113,9 +113,15 @@ function HeaderIntro({ isHomePage }: { isHomePage: boolean }) {
 interface HeaderProps {
   navOpen?: boolean;
   onNavOpenChange?: (open: boolean) => void;
+  /** Phones: the drawer's "My account" row opens the account sheet. */
+  onOpenAccount?: () => void;
 }
 
-export function Header({ navOpen: navOpenProp, onNavOpenChange }: HeaderProps = {}) {
+export function Header({
+  navOpen: navOpenProp,
+  onNavOpenChange,
+  onOpenAccount,
+}: HeaderProps = {}) {
   const { store, theme } = useTwilight();
   const { t } = useTranslation();
   const isDefaultLayout = theme?.settings?.header_layout === 'default';
@@ -133,7 +139,7 @@ export function Header({ navOpen: navOpenProp, onNavOpenChange }: HeaderProps = 
   // product page the body class can still read the *previous* route for a
   // moment (e.g. `.index`), leaving the mobile header visible until the
   // navigation settles. This is correct from the first tick of the
-  // transition, matching `MobilePageTitleBar`'s product-page check.
+  // transition.
   const isProductPage = useRouterState({
     select: (state) => state.matches.some((match) => match.routeId === PRODUCT_ROUTE_ID),
   });
@@ -286,7 +292,11 @@ export function Header({ navOpen: navOpenProp, onNavOpenChange }: HeaderProps = 
 
       {showIntro && <HeaderIntro isHomePage={isHomePage} />}
 
-      <HeaderNav open={navOpen} onClose={() => setNavOpen(false)} />
+      <HeaderNav
+        open={navOpen}
+        onClose={() => setNavOpen(false)}
+        onOpenAccount={onOpenAccount}
+      />
 
       <SallaSearch suppressHydrationWarning />
 
