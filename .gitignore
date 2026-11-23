@@ -10,3 +10,4 @@ coverage/
 tsconfig.tsbuildinfo
 .tanstack/
 app/routeTree.gen.ts
+!.env.example
