@@ -1123,18 +1123,30 @@ body.topnav-is-dark .site-header--lite .site-header__bar {
   @apply h-10;
 }
 
-/* Bag count — accent dot, 16px, white 9px semibold (Figma «Frame» on icon/bag). */
+/* Bag count — Figma «icon/bag» badge: a 16px accent circle, white 9px
+   semibold, hanging off the bag's upper start corner (right side in Arabic:
+   3px above the icon and 5px past its edge). <salla-cart-summary> positions
+   the count against its wrapper, which is the 24px icon itself. */
+.s-cart-summary-wrapper {
+  position: relative;
+}
+
 .s-cart-summary-count {
-  @apply h-4 min-w-[16px] px-1 text-[9px] font-semibold leading-none;
+  @apply p-0 text-[9px] font-semibold leading-none;
+  height: 16px !important;
+  min-width: 16px;
+  width: auto !important;
+  padding-inline: 3px !important;
   background-color: var(--hd-accent) !important;
   color: var(--hd-on-primary) !important;
   border-radius: 9999px;
-  /* Figma: on the bag's upper start corner (right side in Arabic). */
-  top: 4px !important;
+  top: -3px !important;
   bottom: auto !important;
-  inset-inline-start: 4px !important;
-  inset-inline-end: auto !important;
+  left: auto !important;
+  right: auto !important;
+  inset-inline-start: -5px !important;
   transform: none !important;
+  box-shadow: 0 0 0 1.5px var(--hd-bg);
 }
 
 /* Drawer in brand colours */
