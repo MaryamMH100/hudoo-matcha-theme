@@ -154,5 +154,9 @@
   "blocks.hudoo.taste_level.body.2": "ناعم",
   "blocks.hudoo.taste_level.body.3": "متوسط",
   "blocks.hudoo.taste_level.body.4": "كريمي",
-  "blocks.hudoo.taste_level.body.5": "كثيف"
+  "blocks.hudoo.taste_level.body.5": "كثيف",
+  "blocks.hudoo.free_shipping_left": "باقي {amount} وتوصلك مبرّدة مجانًا",
+  "blocks.hudoo.free_shipping_done": "وصلت للشحن المبرّد المجاني",
+  "blocks.hudoo.free_shipping": "التقدم نحو الشحن المجاني",
+  "blocks.hudoo.cart_upsell": "يكمّل طقسك"
 }

@@ -12,6 +12,7 @@ import { loyalty } from '@salla.sa/twilight-theme-engine/api/loyalty';
 import { cart } from '@salla.sa/twilight-theme-engine/api/cart';
 import type { CartPageProps } from '@salla.sa/twilight-theme-engine/routes/cart';
 import { CartItem } from './CartItem';
+import { CartHead, CartUpsell, FreeShippingProgress } from './HudooCart';
 
 /** Whether a failed request was answered 404 (the engine's API client throws ky's `HTTPError`). */
 function isNotFound(error: unknown): boolean {
@@ -127,7 +128,9 @@ function CartPageContent({ page }: CartPageProps) {
       <SeoCartWidget cart={cartData} />
 
       <Breadcrumb page={page} />
-      <h1 className="sr-only">{t('common.titles.cart', 'Cart')}</h1>
+      {/* Hudoo: «السلة (2)» and the free-shipping progress (Figma «04 · Cart»). */}
+      <CartHead count={cartData.items.reduce((sum, item) => sum + (item.quantity || 0), 0)} />
+      <FreeShippingProgress cart={cartData} />
       <SallaConditionalOffer />
 
       <HookSlot name="cart:start" />
@@ -136,7 +139,7 @@ function CartPageContent({ page }: CartPageProps) {
         <div className="main-content w-full lg:w-[calc(100%-384px)]">
           <HookSlot name="cart:items.start" context={{ cartItems: cartData.items }} />
 
-          <div className="cart-titles hidden md:flex rtl:space-x-reverse md:space-x-12 items-center border-b border-gray-200 pb-4 text-sm font-bold text-gray-900 mb-5">
+          <div className="cart-titles hidden lg:flex rtl:space-x-reverse md:space-x-12 items-center border-b border-gray-200 pb-4 text-sm font-bold text-gray-900 mb-5">
             <span className="flex-1">
               {t('blocks.cart.products', 'Products')} ({cartData.items.length})
             </span>
@@ -176,6 +179,8 @@ function CartPageContent({ page }: CartPageProps) {
               ))}
             </div>
           )}
+
+          <CartUpsell cart={cartData} onAdded={refetchCart} />
 
           <SallaOffer />
           <HookSlot name="cart:items.end" />

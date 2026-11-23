@@ -1,0 +1,179 @@
+/* =========================================================================
+   Hudoo cart — Figma «04 · Cart» (390 wide).
+   Markup: CartPage.tsx, CartItem.tsx, HudooCart.tsx; Salla's CartSummary.
+   ========================================================================= */
+
+.hd-cart-head {
+  @apply m-0 pt-4 text-[28px] lg:pt-8 lg:text-4xl;
+
+  &__count {
+    @apply font-sans text-lg font-medium;
+    color: var(--hd-muted);
+  }
+}
+
+/* Free-shipping progress: «باقي 11 ر.س وتوصلك مبرّدة مجانًا» + a 6px track. */
+.hd-ship {
+  @apply mt-4 flex flex-col gap-2.5 rounded-card px-4 py-3.5 lg:max-w-[calc(100%-384px)];
+  background-color: var(--hd-surface);
+
+  &__text {
+    @apply m-0 flex items-center gap-2 text-[13px];
+    color: var(--hd-text);
+
+    b {
+      @apply font-semibold;
+      color: var(--hd-primary);
+    }
+  }
+
+  &__icon {
+    @apply h-[18px] w-[18px] shrink-0;
+    color: var(--hd-primary);
+  }
+
+  &__track {
+    @apply h-1.5 overflow-hidden rounded-full;
+    background-color: var(--hd-line);
+  }
+
+  &__fill {
+    @apply block h-full rounded-full;
+    background-color: var(--hd-primary);
+    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+/* Ours replaces Salla's bar inside the summary when it is showing. */
+.container:has(.hd-ship) #free-shipping,
+.container:has(.hd-ship) #free-shipping-bar {
+  display: none !important;
+}
+
+/* ---- items: photo at the start (88 × 100, radius 16), text, price + stepper at the end */
+.cart-titles {
+  border-color: var(--hd-line) !important;
+  color: var(--hd-muted) !important;
+}
+
+.cart-item {
+  border-color: var(--hd-line) !important;
+
+  img {
+    @apply h-[100px] w-[88px] rounded-2xl object-cover;
+    background-color: var(--hd-surface);
+  }
+
+  a {
+    color: var(--hd-text);
+  }
+
+  .text-gray-500,
+  .text-gray-400 {
+    color: var(--hd-muted) !important;
+  }
+
+  .s-quantity-input-container {
+    @apply h-8 overflow-hidden rounded-full;
+    box-shadow: inset 0 0 0 1px var(--hd-line);
+    background-color: var(--hd-surface);
+  }
+
+  .cart-item__delete:hover {
+    color: var(--hd-accent) !important;
+  }
+}
+
+.hd-cart-grade {
+  @apply inline-flex items-center gap-1.5 text-xs;
+  color: var(--hd-muted);
+
+  &__dot {
+    @apply h-[7px] w-[7px] rounded-full;
+    background-color: var(--grade-color);
+  }
+}
+
+/* ---- upsell «يكمّل طقسك» -------------------------------------------- */
+.hd-upsell {
+  @apply mb-6 mt-2;
+
+  &__title {
+    @apply m-0 mb-3 text-2xl;
+  }
+
+  &__card {
+    @apply flex items-center gap-3 rounded-card p-3;
+    background-color: var(--hd-surface);
+  }
+
+  &__photo {
+    @apply relative h-[60px] w-[60px] shrink-0 overflow-hidden rounded-2xl;
+    background-color: var(--hd-bg);
+  }
+
+  &__img {
+    @apply absolute inset-0 h-full w-full object-cover;
+    mix-blend-mode: multiply;
+  }
+
+  &__text {
+    @apply flex min-w-0 flex-1 flex-col gap-0.5;
+  }
+
+  &__name {
+    @apply truncate text-[13.5px] font-medium;
+    color: var(--hd-text);
+  }
+
+  &__hint {
+    @apply truncate text-[11.5px];
+    color: var(--hd-muted);
+  }
+
+  &__add {
+    @apply inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full px-3.5 text-[13px] font-semibold transition-colors;
+    background-color: var(--hd-bg);
+    color: var(--hd-deep);
+    box-shadow: inset 0 0 0 1px var(--hd-line);
+
+    &:hover {
+      background-color: var(--hd-deep);
+      color: var(--hd-on-primary);
+    }
+
+    &:disabled {
+      @apply cursor-wait opacity-60;
+    }
+  }
+}
+
+/* ---- Salla's summary boxes (coupon, gift, totals, checkout) ----------- */
+.cart .shadow-default,
+.container:has(.hd-cart-head) .shadow-default {
+  background-color: var(--hd-surface) !important;
+  border-radius: var(--hd-radius-card-lg) !important;
+  box-shadow: none !important;
+
+  .text-gray-500 {
+    color: var(--hd-muted) !important;
+  }
+
+  .border-gray-200 {
+    border-color: var(--hd-line) !important;
+  }
+}
+
+.cart-submit-wrap {
+  .s-button-element,
+  salla-button button {
+    @apply min-h-[53px] rounded-full text-[15px] font-semibold;
+    background-color: var(--hd-deep) !important;
+    border-color: var(--hd-deep) !important;
+    color: var(--hd-on-primary) !important;
+
+    &:hover {
+      background-color: var(--hd-primary) !important;
+    }
+  }
+}

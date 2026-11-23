@@ -6,6 +6,8 @@ import { Link, Image } from '@salla.sa/twilight-theme-engine/common';
 import { SallaCartItemOffers } from '@salla.sa/twilight-components-react/cart-item-offers';
 import { Delete01Icon, MinusIcon, PlusIcon } from '../icons';
 import { ProductOptionsPanel, type PanelOption } from '../common/ProductOptionsPanel';
+import { detectGrade } from '../../lib/productTags';
+import { GRADE_COLORS } from '../../lib/tokens';
 
 interface CartItemProps {
   item: CartItemType;
@@ -148,11 +150,19 @@ function CartQuantity({
 
 /** Name + price/offer badges + weight — the left column's text block. */
 function CartItemInfo({ item }: { item: CartItemType }) {
+  // Hudoo: the grade from the product name («ماتشا سيريمونيال · أوجي»); cart lines carry no tags.
+  const grade = detectGrade(item.product_name);
   const { t } = useTranslation();
   const { format } = useMoney();
 
   return (
     <div className="space-y-1">
+      {grade && (
+        <span className="hd-cart-grade" style={{ '--grade-color': GRADE_COLORS[grade] } as React.CSSProperties}>
+          <span className="hd-cart-grade__dot" aria-hidden="true" />
+          {t(`blocks.hudoo.grade.${grade}`, grade)}
+        </span>
+      )}
       <div className="text-gray-900 leading-6 text-lg font-bold">
         <Link to={item.url} className="text-base">
           {item.product_name}

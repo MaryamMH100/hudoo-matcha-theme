@@ -521,6 +521,112 @@
             "format": "line"
         },
         {
+            "type": "static",
+            "format": "title",
+            "id": "hd-title-cart",
+            "variant": "h6",
+            "value": "<div style='background-color:#1E2E17;padding:14px;border-radius:14px;margin-bottom:16px;text-align:center'><h6 style='color:#ffffff;font-size:15px;font-weight:bold;margin:0'>صفحة السلة</h6></div>"
+        },
+        {
+            "id": "free_shipping_enabled",
+            "type": "boolean",
+            "format": "switch",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار شريط التقدم نحو الشحن المجاني",
+            "value": true,
+            "selected": true,
+            "required": false
+        },
+        {
+            "id": "free_shipping_threshold",
+            "type": "number",
+            "format": "number",
+            "icon": "sicon-shipping-fast",
+            "label": "حد الشحن المجاني (بعملة المتجر)",
+            "value": 199,
+            "minimum": 0,
+            "required": false,
+            "description": "قيمة السلة التي يصبح بعدها الشحن مجانياً. اتركه فارغاً لاستخدام قاعدة الشحن المجاني من لوحة سلة. (هذا الشريط للعرض فقط؛ فعّل الشحن المجاني نفسه من إعدادات الشحن في سلة.)",
+            "conditions": [
+                {
+                    "id": "free_shipping_enabled",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": "free_shipping_text",
+            "type": "string",
+            "format": "text",
+            "icon": "sicon-format-text-alt",
+            "label": "النص قبل الوصول للحد",
+            "multilanguage": true,
+            "value": "باقي {amount} وتوصلك مبرّدة مجانًا",
+            "required": false,
+            "maxLength": 80,
+            "description": "اكتب {amount} مكان المبلغ المتبقي.",
+            "conditions": [
+                {
+                    "id": "free_shipping_enabled",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": "free_shipping_done_text",
+            "type": "string",
+            "format": "text",
+            "icon": "sicon-format-text-alt",
+            "label": "النص بعد الوصول للحد",
+            "multilanguage": true,
+            "value": "وصلت للشحن المبرّد المجاني",
+            "required": false,
+            "maxLength": 80,
+            "conditions": [
+                {
+                    "id": "free_shipping_enabled",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": "cart_upsell_enabled",
+            "type": "boolean",
+            "format": "switch",
+            "icon": "sicon-toggle-off",
+            "label": "اقتراح منتج يكمّل السلة",
+            "description": "منتج مشابه لأول منتج في السلة، يضيفه العميل بضغطة.",
+            "value": true,
+            "selected": true,
+            "required": false
+        },
+        {
+            "id": "cart_upsell_title",
+            "type": "string",
+            "format": "text",
+            "icon": "sicon-format-text-alt",
+            "label": "عنوان الاقتراح",
+            "multilanguage": true,
+            "value": "يكمّل طقسك",
+            "required": false,
+            "maxLength": 40,
+            "conditions": [
+                {
+                    "id": "cart_upsell_enabled",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "type": "static",
+            "id": "hd-line-cart",
+            "format": "line"
+        },
+        {
             "id": "product_card_layout",
             "type": "items",
             "format": "dropdown-list",
