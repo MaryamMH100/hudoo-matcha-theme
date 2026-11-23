@@ -50,11 +50,13 @@
 
 ## فلتر الدرجات في صفحة التصنيف
 
-دوائر الألوان (الكل · سيريمونيال · بريميوم · للطبخ) تعمل بالتصنيفات:
+دوائر الألوان (الكل · سيريمونيال · بريميوم · للطبخ) تعمل تلقائياً، بدون أي إعداد:
 
-1. أنشئ تصنيفاً رئيسياً مثل **«الماتشا»**، وتحته ثلاثة تصنيفات فرعية: **سيريمونيال**، **بريميوم**، **للطبخ**.
-2. ضع كل منتج في تصنيف درجته (ويمكن أن يبقى في التصنيف الرئيسي أيضاً).
-3. من **إعدادات القالب** اختر التصنيف المناسب لكل درجة (يُضاف هذا الإعداد في مرحلة صفحة التصنيف).
+- **إذا كان للتصنيف تصنيفات فرعية بأسماء الدرجات**، مثل «الماتشا» وتحته «سيريمونيال» و«بريميوم» و«للطبخ»، تصبح الدوائر روابط لهذه التصنيفات. هذه أدق طريقة، لأن سلة تعرض كل منتجات الدرجة.
+- **وإلا**، تصفّي الدوائر المنتجات المعروضة في الصفحة حسب وسم `درجة:` لكل منتج، أو حسب اسم تصنيفه.
+- تظهر الدوائر فقط عندما توجد درجتان أو أكثر.
+
+وشرائح الاستخدام (للشرب سادة · للاتيه · للحلويات) تظهر عندما تحمل المنتجات وسم `استخدام:`.
 
 ---
 
@@ -76,8 +78,9 @@ Arabic or English keys/values, Arabic-Indic digits. Out-of-range taste values ar
 clamped to 1–5; the first tag wins when a key repeats. Products without these tags
 render normally and the matcha-only blocks hide.
 
-Grade filtering on category pages uses **sub-categories** (one per grade), picked
-in the theme settings.
+Grade circles on category pages link to sub-categories named after a grade when
+the category has two or more; otherwise they filter the loaded products by their
+`grade:` tag (or category name). Use chips appear when products carry `use:` tags.
 
 _Developer note: the reader is `app/lib/productTags.ts`, tested in
 `tests/lib/productTags.test.ts`._

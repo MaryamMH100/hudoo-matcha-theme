@@ -184,3 +184,28 @@ export function costPerCup(price: number | string | null | undefined, cups?: num
   if (!cups || !n || !Number.isFinite(n)) return undefined;
   return Math.round((n / cups) * 10) / 10;
 }
+
+/**
+ * A grade named in free text, such as a category name ("ماتشا سيريمونيال",
+ * "Premium matcha"). Each word, and the whole text, is checked against the
+ * grade names in both languages.
+ */
+export function detectGrade(text: string | null | undefined): Grade | undefined {
+  if (!text) return undefined;
+  const norm = normalize(text);
+  const exact = GRADES.get(norm);
+  if (exact) return exact;
+  for (const word of norm.split(/[\s·\-_/،,]+/)) {
+    const grade = GRADES.get(word) ?? GRADES.get(word.replace(/^ال/, ''));
+    if (grade) return grade;
+  }
+  return undefined;
+}
+
+/** A product's grade: its `grade:` tag first, then its category's name. */
+export function productGrade(product: {
+  tags?: ReadonlyArray<string | { name?: string | null }> | null;
+  category?: { name?: string | null } | null;
+}): Grade | undefined {
+  return parseProductTags(product.tags).grade ?? detectGrade(product.category?.name);
+}

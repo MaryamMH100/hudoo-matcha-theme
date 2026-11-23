@@ -203,6 +203,93 @@
             "format": "line"
         },
         {
+            "type": "static",
+            "format": "title",
+            "id": "hd-title-catalog",
+            "variant": "h6",
+            "value": "<div style='background-color:#1E2E17;padding:14px;border-radius:14px;margin-bottom:16px;text-align:center'><h6 style='color:#ffffff;font-size:15px;font-weight:bold;margin:0'>صفحة التصنيف</h6></div>"
+        },
+        {
+            "id": "catalog_subtitle",
+            "type": "string",
+            "format": "text",
+            "icon": "sicon-format-text-alt",
+            "label": "سطر تحت عنوان التصنيف (اختياري)",
+            "multilanguage": true,
+            "value": null,
+            "required": false,
+            "maxLength": 80,
+            "description": "يظهر بعد عدد المنتجات، مثل: مرتبة من الأزهى للأغمق."
+        },
+        {
+            "id": "quiz_banner_enabled",
+            "type": "boolean",
+            "format": "switch",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار بنر «محتار بين الدرجات؟» داخل قائمة المنتجات",
+            "value": true,
+            "selected": true,
+            "required": false
+        },
+        {
+            "id": "quiz_banner_title",
+            "type": "string",
+            "format": "text",
+            "icon": "sicon-format-text-alt",
+            "label": "عنوان البنر",
+            "multilanguage": true,
+            "value": "محتار بين الدرجات؟",
+            "required": false,
+            "maxLength": 40,
+            "conditions": [
+                {
+                    "id": "quiz_banner_enabled",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": "quiz_banner_text",
+            "type": "string",
+            "format": "text",
+            "icon": "sicon-typography",
+            "label": "نص البنر",
+            "multilanguage": true,
+            "value": "دليل سريع يساعدك تختار الدرجة المناسبة لك",
+            "required": false,
+            "maxLength": 80,
+            "conditions": [
+                {
+                    "id": "quiz_banner_enabled",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": "quiz_banner_link",
+            "type": "string",
+            "format": "url",
+            "icon": "sicon-link",
+            "label": "رابط البنر",
+            "value": null,
+            "required": false,
+            "description": "فارغ = قسم «دليل الدرجات» في الصفحة الرئيسية.",
+            "conditions": [
+                {
+                    "id": "quiz_banner_enabled",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "type": "static",
+            "id": "hd-line-catalog",
+            "format": "line"
+        },
+        {
             "id": "product_card_layout",
             "type": "items",
             "format": "dropdown-list",

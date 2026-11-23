@@ -100,3 +100,21 @@ describe('helpers', () => {
     expect(costPerCup(129, undefined)).toBeUndefined();
   });
 });
+
+describe('detectGrade / productGrade', () => {
+  it('finds a grade inside a category name, in either language', async () => {
+    const { detectGrade } = await import('../../app/lib/productTags');
+    expect(detectGrade('ماتشا سيريمونيال')).toBe('ceremonial');
+    expect(detectGrade('Premium Matcha')).toBe('premium');
+    expect(detectGrade('للطبخ')).toBe('culinary');
+    expect(detectGrade('أدوات التحضير')).toBeUndefined();
+    expect(detectGrade(null)).toBeUndefined();
+  });
+
+  it('prefers the grade tag over the category name', async () => {
+    const { productGrade } = await import('../../app/lib/productTags');
+    expect(productGrade({ tags: [{ name: 'grade:premium' }], category: { name: 'سيريمونيال' } })).toBe('premium');
+    expect(productGrade({ tags: [], category: { name: 'ماتشا للطبخ' } })).toBe('culinary');
+    expect(productGrade({})).toBeUndefined();
+  });
+});

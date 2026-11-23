@@ -1,0 +1,181 @@
+/* =========================================================================
+   Hudoo category page — Figma «02 · Category» (390 wide).
+   Markup: app/components/product/HudooCatalog.tsx + ProductListPage.tsx.
+   ========================================================================= */
+
+/* Title: Amiri 34, then «12 منتج · …» in muted 13px. */
+.hd-catalog-head {
+  @apply flex items-start gap-4 pb-1 pt-2 lg:pt-6;
+
+  &__img {
+    @apply h-16 w-16 shrink-0 rounded-card object-cover lg:h-24 lg:w-24;
+    background-color: var(--hd-surface);
+  }
+
+  &__text {
+    @apply flex min-w-0 flex-col gap-1;
+  }
+
+  &__title {
+    @apply m-0 text-[34px] lg:text-5xl;
+    line-height: 1.3;
+  }
+
+  &__meta {
+    @apply m-0 text-[13px];
+    color: var(--hd-muted);
+  }
+
+  &__desc {
+    @apply m-0 mt-2 max-w-2xl text-sm leading-relaxed;
+    color: var(--hd-muted);
+  }
+}
+
+/* Colour filter: «الكل» + a 48px circle per grade; the active one gets a
+   1.5px deep ring at 58px. */
+.hd-grade-filter {
+  @apply flex gap-1.5 py-[22px] sm:justify-start sm:gap-6;
+
+  &__item {
+    @apply flex min-w-0 flex-1 flex-col items-center gap-2 sm:flex-none;
+    color: var(--hd-muted);
+
+    &:hover .hd-swatch {
+      transform: scale(1.05);
+    }
+
+    &.is-active {
+      color: var(--hd-deep);
+
+      .hd-grade-filter__label {
+        @apply font-semibold;
+      }
+
+      .hd-swatch {
+        box-shadow:
+          0 0 0 5px var(--hd-bg),
+          0 0 0 6.5px var(--hd-deep);
+      }
+    }
+  }
+
+  &__label {
+    @apply whitespace-nowrap text-[12.5px];
+  }
+}
+
+.hd-swatch {
+  @apply m-[5px] block h-12 w-12 rounded-full;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &--ceremonial {
+    background-color: var(--hd-grade-ceremonial);
+  }
+
+  &--premium {
+    background-color: var(--hd-grade-premium);
+  }
+
+  &--culinary {
+    background-color: var(--hd-grade-culinary);
+  }
+
+  &--all {
+    background: conic-gradient(
+      from 200deg,
+      var(--hd-grade-culinary),
+      var(--hd-grade-premium),
+      var(--hd-grade-ceremonial),
+      var(--hd-grade-culinary)
+    );
+  }
+}
+
+/* Use chips: surface pills with a line border; active = deep. */
+.hd-chips {
+  @apply -mx-5 flex gap-2 overflow-x-auto px-5 pb-[18px];
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__chip {
+    @apply min-h-[40px] shrink-0 whitespace-nowrap rounded-full px-3.5 text-[12.5px] transition-colors;
+    background-color: var(--hd-surface);
+    color: var(--hd-text);
+    box-shadow: inset 0 0 0 1px var(--hd-line);
+
+    &:hover {
+      box-shadow: inset 0 0 0 1px var(--hd-deep);
+    }
+
+    &.is-active {
+      @apply font-medium;
+      background-color: var(--hd-deep);
+      color: var(--hd-on-primary);
+      box-shadow: none;
+    }
+  }
+}
+
+/* Toolbar (sort, filters, grid/list) in brand colours. */
+.s-catalog-toolbar {
+  background-color: var(--hd-surface);
+  border-color: var(--hd-line);
+
+  &__options {
+    border-color: var(--hd-line);
+  }
+
+  &__sort,
+  &__filters-toggle {
+    color: var(--hd-text);
+  }
+
+  &__views button[aria-pressed='true'] {
+    background-color: var(--hd-bg);
+    color: var(--hd-deep);
+  }
+}
+
+/* «Not sure which grade?» — a highlight banner across the grid's full row. */
+.hd-catalog-quiz {
+  grid-column: 1 / -1;
+}
+
+.hd-quiz {
+  @apply flex items-center justify-between gap-4 rounded-[20px] p-[18px] transition-shadow lg:px-8 lg:py-6;
+  background-color: var(--hd-highlight);
+  color: var(--hd-deep);
+
+  &:hover {
+    box-shadow: var(--hd-shadow-lift);
+  }
+
+  &__text {
+    @apply flex min-w-0 flex-col gap-1;
+  }
+
+  &__title {
+    @apply text-xl lg:text-2xl;
+  }
+
+  &__sub {
+    @apply text-[12.5px] lg:text-sm;
+  }
+
+  &__go {
+    @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-full;
+    background-color: var(--hd-deep);
+    color: var(--hd-on-primary);
+  }
+}
+
+.hd-catalog-none {
+  @apply col-span-full py-10 text-center text-sm;
+  color: var(--hd-muted);
+}

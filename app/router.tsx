@@ -40,6 +40,7 @@ import {
 } from './components/home/hudoo';
 import { registerThemeHooks } from './hooks';
 import { ProductListSkeleton } from './components/product/ProductListSkeleton';
+import { HudooProductCard } from './components/product/HudooProductCard';
 
 const ProductListPage = lazy(() =>
   import('./components/product/ProductListPage').then((m) => ({ default: m.ProductListPage }))
@@ -47,6 +48,10 @@ const ProductListPage = lazy(() =>
 
 // Register theme-level hooks (AddProductToast, DigitalFilesSettings, etc.)
 registerThemeHooks();
+
+// One card everywhere: register, then override (override alone is ignored).
+registry.register('product:card', HudooProductCard);
+registry.override('product:card', HudooProductCard);
 
 registry.register('product:list-page', ProductListPage);
 registry.register('product:list-skeleton', ProductListSkeleton);

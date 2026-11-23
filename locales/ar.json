@@ -112,5 +112,20 @@
   "blocks.hudoo.shop_grade": "تسوّق {grade}",
   "blocks.hudoo.add_recipe": "أضف مكونات الوصفة للسلة",
   "blocks.hudoo.read_recipe": "اقرأ الوصفة",
-  "blocks.home.display_all": "عرض الكل"
+  "blocks.home.display_all": "عرض الكل",
+  "blocks.hudoo.use.drink": "للشرب سادة",
+  "blocks.hudoo.use.latte": "للاتيه",
+  "blocks.hudoo.use.baking": "للحلويات",
+  "blocks.hudoo.sold_out": "نفدت الكمية",
+  "blocks.hudoo.discount": "خصم",
+  "blocks.hudoo.from": "يبدأ من",
+  "blocks.hudoo.add_to_cart": "أضف للسلة",
+  "blocks.hudoo.choose_options": "اختر الخيارات",
+  "blocks.hudoo.products_count": "{count} منتج",
+  "blocks.hudoo.all": "الكل",
+  "blocks.hudoo.filter_by_grade": "تصفية حسب الدرجة",
+  "blocks.hudoo.filter_by_use": "تصفية حسب الاستخدام",
+  "blocks.hudoo.no_match": "لا توجد منتجات تطابق هذا الاختيار بعد.",
+  "blocks.hudoo.quiz_title": "محتار بين الدرجات؟",
+  "blocks.hudoo.quiz_text": "دليل سريع يساعدك تختار الدرجة المناسبة لك"
 }

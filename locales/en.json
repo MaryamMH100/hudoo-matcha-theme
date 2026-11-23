@@ -112,5 +112,20 @@
   "blocks.hudoo.shop_grade": "Shop {grade}",
   "blocks.hudoo.add_recipe": "Add the ingredients to cart",
   "blocks.hudoo.read_recipe": "Read the recipe",
-  "blocks.home.display_all": "View all"
+  "blocks.home.display_all": "View all",
+  "blocks.hudoo.use.drink": "Plain drinking",
+  "blocks.hudoo.use.latte": "For lattes",
+  "blocks.hudoo.use.baking": "For baking",
+  "blocks.hudoo.sold_out": "Sold out",
+  "blocks.hudoo.discount": "Off",
+  "blocks.hudoo.from": "From",
+  "blocks.hudoo.add_to_cart": "Add to cart",
+  "blocks.hudoo.choose_options": "Choose options",
+  "blocks.hudoo.products_count": "{count} products",
+  "blocks.hudoo.all": "All",
+  "blocks.hudoo.filter_by_grade": "Filter by grade",
+  "blocks.hudoo.filter_by_use": "Filter by use",
+  "blocks.hudoo.no_match": "No products match this filter yet.",
+  "blocks.hudoo.quiz_title": "Not sure which grade?",
+  "blocks.hudoo.quiz_text": "A quick guide to the grade that suits you"
 }

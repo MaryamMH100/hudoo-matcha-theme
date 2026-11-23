@@ -13,11 +13,19 @@ vi.mock('../../../app/hooks/useProductCardLayout', () => ({
   useProductCardLayout: () => cardLayout.value,
 }));
 
-// Only the module under test, not the whole barrel and everything it re-exports.
-vi.mock('../../../app/components/product', async () => ({
-  ProductCard: (await vi.importActual<typeof import('../../../app/components/product/ProductCard')>(
-    '../../../app/components/product/ProductCard'
-  )).ProductCard,
+// The card itself has its own tests (HudooProductCard.test.tsx); a stub here.
+vi.mock('../../../app/components/product', () => ({
+  ProductCard: ({
+    product,
+    layout,
+  }: {
+    product: { id?: number; name?: string };
+    layout?: string;
+  }) => (
+    <div data-testid="product-card" data-layout={layout ?? 'vertical'}>
+      {product.name}
+    </div>
+  ),
 }));
 
 vi.mock('@salla.sa/twilight-theme-engine/i18n', () => ({

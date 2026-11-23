@@ -1,0 +1,207 @@
+/* =========================================================================
+   Hudoo product card — Figma «Component · Product Card» (168 × 295).
+   Markup: app/components/product/HudooProductCard.tsx.
+   ========================================================================= */
+
+.hd-card {
+  @apply relative flex min-w-0 flex-col gap-2;
+  color: var(--hd-text);
+
+  /* Name link stretched over the whole card; buttons sit above it. */
+  &__name a {
+    @apply outline-none;
+
+    &::after {
+      content: '';
+      @apply absolute inset-0 z-[1];
+      border-radius: var(--hd-radius-sm);
+    }
+
+    &:focus-visible::after {
+      outline: 2px solid var(--hd-primary);
+      outline-offset: 3px;
+    }
+  }
+
+  /* ---- media ---------------------------------------------------------- */
+  &__media {
+    @apply relative w-full overflow-hidden;
+    aspect-ratio: 168 / 204;
+    background-color: var(--hd-surface);
+    border-radius: var(--hd-radius-sm);
+  }
+
+  &__img {
+    @apply absolute inset-0 h-full w-full object-cover;
+    /* White studio backgrounds take the card's cream instead of a white box. */
+    mix-blend-mode: multiply;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (hover: hover) {
+    &:hover &__img {
+      transform: scale(1.04);
+    }
+  }
+
+  &__placeholder {
+    @apply absolute inset-0 flex items-center justify-center;
+    color: var(--hd-line);
+  }
+
+  &__grade {
+    @apply pointer-events-none absolute top-2.5 z-[2] flex items-center gap-1.5 rounded-full px-[9px] py-[5px] text-[11px] font-medium;
+    inset-inline-start: 10px;
+    background-color: var(--hd-surface);
+    color: var(--hd-text);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+  }
+
+  &__grade-dot {
+    @apply h-2 w-2 rounded-full;
+    background-color: var(--grade-color, var(--hd-primary));
+  }
+
+  /* Heart: a 30px circle (Figma), with a 44px tap area. */
+  &__fav {
+    @apply absolute top-2.5 z-[2] flex h-[30px] w-[30px] items-center justify-center rounded-full transition-colors;
+    inset-inline-end: 10px;
+    background-color: var(--hd-surface);
+    color: var(--hd-text);
+
+    &::before {
+      content: '';
+      @apply absolute -inset-[7px];
+    }
+
+    &:hover {
+      color: var(--hd-accent);
+    }
+
+    &.is-active {
+      color: var(--hd-accent);
+
+      path {
+        fill: currentColor;
+      }
+    }
+  }
+
+  &__flag {
+    @apply pointer-events-none absolute bottom-2.5 z-[2] rounded-full px-2.5 py-1 text-[11px] font-semibold;
+    inset-inline-start: 10px;
+    background-color: var(--hd-accent);
+    color: var(--hd-on-primary);
+
+    &--out {
+      background-color: var(--hd-deep);
+    }
+  }
+
+  &.is-sold-out &__img {
+    opacity: 0.55;
+    filter: grayscale(0.35);
+  }
+
+  /* ---- body ----------------------------------------------------------- */
+  &__body {
+    @apply flex min-w-0 flex-1 flex-col gap-2;
+  }
+
+  &__name {
+    @apply m-0 line-clamp-2 text-sm font-semibold leading-snug;
+
+    a {
+      color: inherit;
+    }
+  }
+
+  &__meta {
+    @apply m-0 -mt-1 truncate text-xs;
+    color: var(--hd-muted);
+  }
+
+  &__row {
+    @apply mt-auto flex items-center justify-between gap-2;
+  }
+
+  &__price {
+    @apply m-0 flex min-w-0 flex-wrap items-baseline gap-x-1.5;
+  }
+
+  &__now {
+    @apply text-[15px] font-semibold;
+    color: var(--hd-text);
+
+    &.is-sale {
+      color: var(--hd-accent);
+    }
+  }
+
+  &__was {
+    @apply text-xs;
+    color: var(--hd-muted);
+  }
+
+  &__from {
+    @apply text-xs;
+    color: var(--hd-muted);
+  }
+
+  /* «+»: a 34px deep circle (Figma), 44px tap area. */
+  &__add,
+  &__add-wrap .s-button-element {
+    @apply relative z-[2] flex h-[34px] w-[34px] min-w-0 shrink-0 items-center justify-center rounded-full border-0 p-0 transition-colors;
+    background-color: var(--hd-deep) !important;
+    color: var(--hd-on-primary) !important;
+
+    &::before {
+      content: '';
+      @apply absolute -inset-[5px];
+    }
+
+    &:hover {
+      background-color: var(--hd-primary) !important;
+    }
+  }
+
+  &__add-wrap {
+    @apply relative z-[2] shrink-0;
+
+    .s-button-wrap {
+      @apply m-0 w-auto;
+    }
+
+    .s-button-text {
+      @apply flex items-center justify-center;
+    }
+
+    /* The cart icon Salla may add next to the label. */
+    .s-button-element > i {
+      display: none;
+    }
+  }
+
+  /* ---- horizontal (list view) ---------------------------------------- */
+  &--horizontal {
+    @apply grid grid-cols-[112px_1fr] items-stretch gap-3 rounded-card p-2.5 sm:grid-cols-[160px_1fr] sm:gap-5;
+    background-color: var(--hd-surface);
+
+    .hd-card__media {
+      aspect-ratio: 1;
+      background-color: var(--hd-bg);
+    }
+
+    .hd-card__body {
+      @apply py-1;
+    }
+  }
+}
+
+/* Product grids: 2 columns on phones with Figma's 14px gutter. */
+.s-products-list-wrapper.s-products-list-vertical-cards {
+  @media (max-width: 767px) {
+    column-gap: 14px;
+    row-gap: 24px;
+  }
+}

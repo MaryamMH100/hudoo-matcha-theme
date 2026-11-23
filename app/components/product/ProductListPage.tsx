@@ -22,6 +22,18 @@ import { product, parseNextPageToken } from '@salla.sa/twilight-theme-engine/api
 import type { ProductListLoaderData } from '@salla.sa/twilight-theme-engine/routes/product-listing';
 import type { Product } from '@salla.sa/twilight-theme-engine/types';
 import { ProductCard } from './ProductCard';
+import {
+  CatalogHeader,
+  GradeFilter,
+  QuizBanner,
+  UseChips,
+  gradeSubcategories,
+  matchesFacets,
+  presentFacets,
+  type GradeFilterValue,
+} from './HudooCatalog';
+import type { Use } from '../../lib/productTags';
+import type { Category } from '@salla.sa/twilight-theme-engine/types';
 import { useAppliedFilters } from '@salla.sa/twilight-theme-engine/routes/product-listing';
 import type { ProductListFilters } from '@salla.sa/twilight-theme-engine/api/product';
 import { BlockHookSlot, BottomSheet } from '../common';
@@ -302,7 +314,13 @@ function CatalogGrid({
   wideGridClass,
   filterStatus,
   onRetry,
+  keepItem,
+  showQuiz,
 }: {
+  /** Hudoo grade / use filter, applied to the loaded products. */
+  keepItem: (product: Product) => boolean;
+  /** «Not sure which grade?» banner after the first two products (categories, grid view). */
+  showQuiz: boolean;
   filterStatus: 'idle' | 'loading' | 'ready' | 'error';
   onRetry: () => void;
   filtersVisible: boolean;
@@ -374,16 +392,45 @@ function CatalogGrid({
               }
               t={(key, fallback) => t(key, fallback || key)}
             >
-              {(items) =>
-                items.map((prod, idx) => (
-                  <ProductCard
-                    key={prod.id}
-                    product={prod}
-                    index={idx}
-                    layout={view === 'list' ? 'horizontal' : 'vertical'}
-                  />
-                ))
-              }
+              {(items) => {
+                const kept = items.filter(keepItem);
+                if (!kept.length && items.length) {
+                  return (
+                    <p className="hd-catalog-none">
+                      {t('blocks.hudoo.no_match', 'No products match this filter yet.')}
+                    </p>
+                  );
+                }
+                return kept.flatMap((prod, idx) => {
+                  const card = (
+                    <ProductCard
+                      key={prod.id}
+                      product={prod}
+                      index={idx}
+                      layout={view === 'list' ? 'horizontal' : 'vertical'}
+                    />
+                  );
+                  // The banner closes the first row: after 2 cards on phones (2 columns),
+                  // after 4 or 5 on desktop (with / without the filter column).
+                  const desktopAt = filtersVisible ? 3 : 4;
+                  const extra = [];
+                  if (showQuiz && idx === 1) {
+                    extra.push(
+                      <div key="hd-quiz-m" className="hd-catalog-quiz md:hidden">
+                        <QuizBanner />
+                      </div>
+                    );
+                  }
+                  if (showQuiz && idx === Math.min(desktopAt, kept.length - 1)) {
+                    extra.push(
+                      <div key="hd-quiz-d" className="hd-catalog-quiz hidden md:block">
+                        <QuizBanner />
+                      </div>
+                    );
+                  }
+                  return [card, ...extra];
+                });
+              }}
             </ItemsList>
           )}
         </div>
@@ -485,6 +532,19 @@ export function ProductListPage({
       ? ''
       : `${filterStatus}${filterStatus === 'ready' ? JSON.stringify(appliedFilters) : ''}`;
 
+  // Hudoo grade circles + use chips (Figma «02 · Category»). They filter the
+  // loaded products in place, or link to grade sub-categories when the
+  // category has them. The page is keyed by the list, so both reset per list.
+  const [gradeFilter, setGradeFilter] = useState<GradeFilterValue>('all');
+  const [useFilter, setUseFilter] = useState<Use | null>(null);
+  const category = source.type === 'categories' ? (source.entity as Category | undefined) : undefined;
+  const gradeLinks = useMemo(() => gradeSubcategories(category), [category]);
+  const facets = useMemo(() => presentFacets(shownProducts), [shownProducts]);
+  const keepItem = useCallback(
+    (item: Product) => matchesFacets(item, gradeLinks.length ? 'all' : gradeFilter, useFilter),
+    [gradeFilter, useFilter, gradeLinks.length]
+  );
+
   const isBrand = source.type === 'brands';
   const isReorder = source.type === 'reorder';
   useReorderButtons(isReorder);
@@ -530,7 +590,7 @@ export function ProductListPage({
   return (
     <div
       key={listKey}
-      className="container px-2.5 mb-10"
+      className="container mb-10"
       data-source={isReorder ? 'reorder' : undefined}
     >
       {theme?.settings?.product_index_show_breadcrumbs !== false && <Breadcrumb page={page} />}
@@ -547,9 +607,18 @@ export function ProductListPage({
         scope={blockScope}
       />
 
-      <h1 className="font-bold text-xl mb-4" id="page-main-title">
-        {isBrand ? t('common.titles.products') : page.title}
-      </h1>
+      <CatalogHeader
+        title={isBrand ? t('common.titles.products') : page.title}
+        category={category}
+      />
+
+      <GradeFilter
+        links={gradeLinks}
+        grades={facets.grades}
+        value={gradeFilter}
+        onChange={setGradeFilter}
+      />
+      <UseChips uses={facets.uses} value={useFilter} onChange={setUseFilter} />
 
       {/* Toolbar — one bar: filter show/hide at the start, options at the end */}
       <MobileStickyToolbar>
@@ -580,6 +649,8 @@ export function ProductListPage({
         loader={loader}
         listLayoutClass={listLayoutClass}
         wideGridClass={wideGridClass}
+        keepItem={keepItem}
+        showQuiz={source.type === 'categories' && view === 'grid'}
       />
 
       {/* App-block hook `product.index.after_products_group_with_filter` — below the listing */}
