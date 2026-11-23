@@ -15,6 +15,8 @@ import { useMobileViewport } from '../../hooks/useMobileViewport';
 import { youtubeFacades } from '../../lib/descriptionVideos';
 import { ProductMetadata } from './ProductMetadata';
 import { WishlistHeartButton } from './WishlistHeartButton';
+import { CostPerCup, ProductBadges } from './HudooProductExtras';
+import { isDataTag } from '../../lib/productTags';
 
 interface ProductDetailsProps {
   product: Product;
@@ -47,6 +49,8 @@ export function ProductDetails({
 
   // Context for all product hooks - contains product data
   const productHookContext = { product };
+  // Hudoo data tags (`grade:…`, `umami:…`) drive the page; customers don't see them as tags.
+  const visibleTags = (product.tags ?? []).filter((tag) => !isDataTag(tag.name));
 
   return (
     <>
@@ -67,9 +71,12 @@ export function ProductDetails({
         </div>
       )}
 
+      {/* Hudoo: grade + harvest badges above the title (from the product's tags). */}
+      <ProductBadges product={product} />
+
       <div className="mb-2.5 flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-xl md:text-2xl leading-10 font-bold text-gray-800">{product.name}</h1>
+          <h1 className="hd-display hd-product-title">{product.name}</h1>
           {product.subtitle && (
             <h2 className="product-entry__sub-title text-sm text-gray-500 leading-6 font-normal">
               {product.subtitle}
@@ -97,7 +104,10 @@ export function ProductDetails({
         <small className="color-grey">{t('pages.products.tax_included')}</small>
       )}
 
-      <ProductPrice product={product} />
+      <div className="hd-product-price">
+        <ProductPrice product={product} />
+        <CostPerCup product={product} />
+      </div>
 
       <ProductDescription product={product} />
 
@@ -109,9 +119,9 @@ export function ProductDetails({
         <ProductMetadata className="mb-3 md:hidden" />
       )}
 
-      {!!product.tags?.length && showTags && (
+      {!!visibleTags.length && showTags && (
         <div className="mb-3">
-          {product.tags.map((tag, index, tags) => (
+          {visibleTags.map((tag, index, tags) => (
             <Fragment key={tag.name}>
               <Link
                 to={tag.url}

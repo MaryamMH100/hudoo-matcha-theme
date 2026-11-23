@@ -15,6 +15,7 @@ import { ProductDetails } from './ProductDetails';
 import { AddToCartForm } from './AddToCartForm';
 import { BlockHookSlot } from '../common';
 import { ProductsSlider } from '../home';
+import { BrewSteps, CompleteRitual, TasteProfile } from './HudooProductExtras';
 
 /**
  * "Similar products" slider. A separate component (not inline in
@@ -143,6 +144,14 @@ export function ProductPage({ product: initialProduct, page }: ProductPageProps)
         </div>
 
         <SallaOffer />
+      </div>
+
+      {/* Hudoo: taste profile · brew steps · complete the ritual (each hides itself
+          when the product has no matcha data). */}
+      <div className="container hd-product-extras">
+        <TasteProfile product={product} />
+        <BrewSteps product={product} />
+        <CompleteRitual product={product} />
       </div>
 
       {/* App-block hook `product.single.before_customer_reviews` — between the info and the reviews */}

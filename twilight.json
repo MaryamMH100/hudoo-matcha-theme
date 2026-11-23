@@ -290,6 +290,237 @@
             "format": "line"
         },
         {
+            "type": "static",
+            "format": "title",
+            "id": "hd-title-product",
+            "variant": "h6",
+            "value": "<div style='background-color:#1E2E17;padding:14px;border-radius:14px;margin-bottom:16px;text-align:center'><h6 style='color:#ffffff;font-size:15px;font-weight:bold;margin:0'>صفحة المنتج</h6></div>"
+        },
+        {
+            "type": "static",
+            "format": "description",
+            "id": "hd-product-note",
+            "value": "<div>بروفايل الطعم وشارة الدرجة وتكلفة الكوب تُقرأ من وسوم المنتج (درجة:، أومامي:، أكواب:…). طريقة التحضير و«أكمل الطقس» تظهر على منتجات الماتشا فقط.</div>"
+        },
+        {
+            "id": "product_brew_enabled",
+            "type": "boolean",
+            "format": "switch",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار «طريقة التحضير» في منتجات الماتشا",
+            "value": true,
+            "selected": true,
+            "required": false
+        },
+        {
+            "id": "product_brew_title",
+            "type": "string",
+            "format": "text",
+            "icon": "sicon-format-text-alt",
+            "label": "عنوان طريقة التحضير",
+            "multilanguage": true,
+            "value": "طريقة التحضير · أوسوتشا",
+            "required": false,
+            "maxLength": 60,
+            "conditions": [
+                {
+                    "id": "product_brew_enabled",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "type": "collection",
+            "format": "collection",
+            "id": "product_brew_steps",
+            "label": "خطوات التحضير",
+            "item_label": "خطوة",
+            "required": false,
+            "minLength": 1,
+            "maxLength": 6,
+            "conditions": [
+                {
+                    "id": "product_brew_enabled",
+                    "operation": "=",
+                    "value": true
+                }
+            ],
+            "fields": [
+                {
+                    "type": "items",
+                    "format": "dropdown-list",
+                    "id": "product_brew_steps.icon",
+                    "label": "الأيقونة",
+                    "icon": "sicon-list",
+                    "source": "Manual",
+                    "required": true,
+                    "selected": [
+                        {
+                            "label": "ملعقة",
+                            "value": "spoon",
+                            "key": "product_brew_steps.icon-spoon"
+                        }
+                    ],
+                    "options": [
+                        {
+                            "label": "ثلج",
+                            "value": "snow",
+                            "key": "product_brew_steps.icon-snow"
+                        },
+                        {
+                            "label": "رحى",
+                            "value": "mill",
+                            "key": "product_brew_steps.icon-mill"
+                        },
+                        {
+                            "label": "ورقة",
+                            "value": "leaf",
+                            "key": "product_brew_steps.icon-leaf"
+                        },
+                        {
+                            "label": "مخفقة",
+                            "value": "whisk",
+                            "key": "product_brew_steps.icon-whisk"
+                        },
+                        {
+                            "label": "حرارة",
+                            "value": "thermo",
+                            "key": "product_brew_steps.icon-thermo"
+                        },
+                        {
+                            "label": "قطرة ماء",
+                            "value": "drop",
+                            "key": "product_brew_steps.icon-drop"
+                        },
+                        {
+                            "label": "ملعقة",
+                            "value": "spoon",
+                            "key": "product_brew_steps.icon-spoon"
+                        }
+                    ]
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "product_brew_steps.text",
+                    "label": "الخطوة",
+                    "multilanguage": true,
+                    "value": null,
+                    "required": true,
+                    "maxLength": 60
+                },
+                {
+                    "type": "string",
+                    "format": "text",
+                    "id": "product_brew_steps.hint",
+                    "label": "ملاحظة صغيرة",
+                    "multilanguage": true,
+                    "value": null,
+                    "required": false,
+                    "maxLength": 60
+                }
+            ],
+            "value": [
+                {
+                    "product_brew_steps.icon": "spoon",
+                    "product_brew_steps.text": "انخل 2 جم (ملعقتين خيزران)",
+                    "product_brew_steps.hint": "النخل يمنع الكتل"
+                },
+                {
+                    "product_brew_steps.icon": "thermo",
+                    "product_brew_steps.text": "أضف 70 مل ماء على 80°",
+                    "product_brew_steps.hint": "الماء المغلي يحرق الطعم"
+                },
+                {
+                    "product_brew_steps.icon": "whisk",
+                    "product_brew_steps.text": "اخفق على شكل M لمدة 15 ثانية",
+                    "product_brew_steps.hint": "لين ما تطلع رغوة ناعمة"
+                },
+                {
+                    "product_brew_steps.icon": "drop",
+                    "product_brew_steps.text": "اشربها مباشرة",
+                    "product_brew_steps.hint": "وتقدر تضيف حليب للاتيه"
+                }
+            ]
+        },
+        {
+            "id": "ritual_enabled",
+            "type": "boolean",
+            "format": "switch",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار «أكمل الطقس» في منتجات الماتشا",
+            "value": true,
+            "selected": true,
+            "required": false
+        },
+        {
+            "id": "ritual_title",
+            "type": "string",
+            "format": "text",
+            "icon": "sicon-format-text-alt",
+            "label": "عنوان «أكمل الطقس»",
+            "multilanguage": true,
+            "value": "أكمل الطقس",
+            "required": false,
+            "maxLength": 40,
+            "conditions": [
+                {
+                    "id": "ritual_enabled",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": "ritual_text",
+            "type": "string",
+            "format": "text",
+            "icon": "sicon-typography",
+            "label": "سطر تحت العنوان (اختياري)",
+            "multilanguage": true,
+            "value": null,
+            "required": false,
+            "maxLength": 80,
+            "description": "مثلاً: وفّر 10% لما تاخذ الثلاثة مع بعض — اكتبه فقط إذا أنشأت العرض في لوحة سلة.",
+            "conditions": [
+                {
+                    "id": "ritual_enabled",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": "ritual_products",
+            "type": "items",
+            "format": "dropdown-list",
+            "icon": "sicon-packed-box",
+            "label": "أدوات الطقس (اختياري)",
+            "source": "products",
+            "searchable": true,
+            "multichoice": true,
+            "selected": [],
+            "options": [],
+            "value": [],
+            "required": false,
+            "minLength": 0,
+            "maxLength": 2,
+            "description": "مثلاً الوعاء والمخفقة. بدون اختيار تُعرض منتجات مشابهة.",
+            "conditions": [
+                {
+                    "id": "ritual_enabled",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "type": "static",
+            "id": "hd-line-product",
+            "format": "line"
+        },
+        {
             "id": "product_card_layout",
             "type": "items",
             "format": "dropdown-list",

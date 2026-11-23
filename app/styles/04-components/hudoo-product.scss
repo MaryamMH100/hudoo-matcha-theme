@@ -1,0 +1,337 @@
+/* =========================================================================
+   Hudoo product page — Figma «03 · Product» (390 wide).
+   Markup: ProductDetails.tsx, AddToCartForm.tsx, HudooProductExtras.tsx.
+   ========================================================================= */
+
+/* ---- gallery: a calm surface box ------------------------------------- */
+.details-slider,
+.product-gallery .swiper,
+.product-gallery__main {
+  background-color: var(--hd-surface);
+  border-radius: var(--hd-radius-card-lg);
+  overflow: hidden;
+}
+
+.details-slider img,
+.product-gallery img {
+  mix-blend-mode: multiply;
+}
+
+/* ---- info ------------------------------------------------------------ */
+.hd-product-badges {
+  @apply mb-3.5 flex flex-wrap gap-2;
+
+  &__grade,
+  &__harvest {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11.5px];
+  }
+
+  &__grade {
+    @apply font-medium;
+    background-color: var(--hd-surface);
+    color: var(--hd-text);
+    box-shadow: inset 0 0 0 1px var(--hd-line);
+  }
+
+  &__dot {
+    @apply h-2 w-2 rounded-full;
+    background-color: var(--grade-color);
+  }
+
+  &__harvest {
+    @apply font-semibold;
+    background-color: var(--hd-highlight);
+    color: var(--hd-deep);
+  }
+}
+
+.hd-product-title {
+  @apply m-0 text-[32px] lg:text-[40px];
+  line-height: 1.25;
+}
+
+.main-content .product-entry__sub-title {
+  color: var(--hd-muted);
+}
+
+.hd-product-price {
+  @apply my-3.5 flex flex-wrap items-center gap-x-2.5 gap-y-2;
+
+  > div {
+    @apply mb-0;
+  }
+
+  p {
+    @apply text-2xl font-semibold;
+    color: var(--hd-text) !important;
+  }
+
+  .line-through {
+    color: var(--hd-muted);
+  }
+}
+
+.hd-cost-cup {
+  @apply inline-flex items-center gap-1 rounded-lg px-2.5 py-[5px] text-xs font-medium;
+  background-color: var(--hd-surface);
+  color: var(--hd-primary);
+}
+
+.main-content .product__description,
+.main-content .article--main {
+  @apply text-sm;
+  line-height: 1.7;
+  color: var(--hd-muted);
+}
+
+/* Salla options: size choices as cards (Figma «الحجم»), the chosen one ringed in deep. */
+salla-product-options {
+  .s-product-options-option-label {
+    @apply mb-2.5 text-[13px] font-semibold;
+    color: var(--hd-text);
+  }
+
+  .s-product-options-option-content label,
+  .s-product-options-thumbnails-wrapper label {
+    @apply min-h-[48px] rounded-[14px] px-3.5 py-3 transition-shadow;
+    background-color: var(--hd-surface);
+    box-shadow: inset 0 0 0 1px var(--hd-line);
+    color: var(--hd-text);
+  }
+
+  input:checked + label,
+  label:has(input:checked) {
+    box-shadow: inset 0 0 0 1.5px var(--hd-deep);
+  }
+
+  select {
+    @apply min-h-[48px] rounded-[14px];
+    background-color: var(--hd-surface);
+    border-color: var(--hd-line);
+  }
+}
+
+/* Add-to-cart button: deep pill (Figma «أضيفي للسلة · 129 ر.س»). */
+.sticky-product-bar__btn .s-button-element,
+.sticky-product-bar salla-add-product-button .s-button-primary {
+  @apply min-h-[52px] rounded-full text-[15px] font-semibold;
+  background-color: var(--hd-deep) !important;
+  border-color: var(--hd-deep) !important;
+  color: var(--hd-on-primary) !important;
+
+  &:hover {
+    background-color: var(--hd-primary) !important;
+  }
+}
+
+.sticky-product-bar .s-quantity-input-container,
+.sticky-product-bar salla-quantity-input {
+  @apply rounded-full;
+  box-shadow: inset 0 0 0 1px var(--hd-line);
+}
+
+/* Phones, sticky bar (setting `sticky_add_to_cart`): a full-width surface bar at
+   the bottom with the button at the start and the stepper at the end. */
+@media (max-width: 640px) {
+  .is-sticky-product-bar .sticky-product-bar {
+    @apply inset-x-0 flex-row flex-nowrap items-center gap-3 px-5 pt-3.5;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    border-radius: 0 !important;
+    padding-bottom: calc(14px + var(--safe-bottom));
+    background-color: var(--hd-surface) !important;
+    border-top: 1px solid var(--hd-line);
+    box-shadow: 0 -8px 24px -18px rgb(30 46 23 / 0.35);
+
+    salla-add-product-button {
+      order: 1;
+      margin: 0 !important;
+    }
+
+    .sticky-product-bar__quantity {
+      order: 2;
+      @apply m-0 w-auto shrink-0;
+    }
+  }
+}
+
+/* ---- sections under the info ---------------------------------------- */
+.hd-product-extras {
+  @apply flex flex-col lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-6 lg:pt-10;
+
+  > .hd-ritual {
+    @apply lg:col-span-2;
+  }
+}
+
+.hd-product-section__title {
+  @apply m-0 mb-3.5 text-2xl lg:text-[28px];
+}
+
+/* Taste profile: surface band, label · five segments · a word for the level. */
+.hd-taste {
+  @apply -mx-5 px-5 py-[22px] lg:mx-0 lg:rounded-card-lg lg:p-8;
+  background-color: var(--hd-surface);
+
+  &__rows {
+    @apply m-0 flex flex-col gap-3.5;
+  }
+
+  &__row {
+    @apply flex items-center gap-3;
+  }
+
+  &__name {
+    @apply w-14 shrink-0 text-[13px] font-medium;
+    color: var(--hd-text);
+  }
+
+  &__value {
+    @apply m-0 flex min-w-0 flex-1 items-center gap-3;
+  }
+
+  &__bar {
+    @apply flex min-w-0 flex-1 gap-1;
+  }
+
+  &__seg {
+    @apply h-2 flex-1 rounded-[4px];
+    background-color: var(--hd-line);
+
+    &.is-on {
+      background-color: var(--hd-primary);
+    }
+  }
+
+  &__word {
+    @apply w-16 shrink-0 text-end text-xs;
+    color: var(--hd-muted);
+  }
+}
+
+/* Brew steps: icon circle with a numbered badge, the step and a hint. */
+.hd-brew-steps {
+  @apply py-7 lg:rounded-card-lg lg:p-8;
+
+  &__list {
+    @apply m-0 flex list-none flex-col gap-3.5 p-0;
+  }
+
+  &__step {
+    @apply flex items-center gap-3.5;
+  }
+
+  &__icon {
+    @apply relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full;
+    background-color: var(--hd-surface);
+    color: var(--hd-primary);
+  }
+
+  &__num {
+    @apply absolute -top-0.5 flex h-[18px] w-[18px] items-center justify-center rounded-full text-[10px] font-semibold;
+    inset-inline-end: -2px;
+    background-color: var(--hd-deep);
+    color: var(--hd-on-primary);
+  }
+
+  &__text {
+    @apply flex min-w-0 flex-col gap-0.5;
+  }
+
+  &__main {
+    @apply text-sm font-medium;
+    color: var(--hd-text);
+  }
+
+  &__hint {
+    @apply text-xs;
+    color: var(--hd-muted);
+  }
+}
+
+/* Complete the ritual: three tiles that can be ticked off, total and «add the set». */
+.hd-ritual {
+  @apply pb-8 pt-6;
+
+  &__text {
+    @apply -mt-1.5 mb-3.5 text-[13px];
+    color: var(--hd-muted);
+  }
+
+  &__items {
+    @apply m-0 grid list-none grid-cols-3 gap-2.5 p-0 lg:max-w-2xl;
+  }
+
+  &__item {
+    @apply relative flex flex-col gap-1.5 rounded-[18px] p-2 pb-3 transition-opacity;
+    background-color: var(--hd-surface);
+    opacity: 0.55;
+
+    &.is-on {
+      opacity: 1;
+    }
+  }
+
+  &__tick {
+    @apply absolute top-3 z-[1] flex h-[22px] w-[22px] items-center justify-center rounded-md;
+    inset-inline-end: 12px;
+    background-color: var(--hd-surface);
+    color: transparent;
+    box-shadow: inset 0 0 0 1.5px var(--hd-line);
+
+    &::before {
+      content: '';
+      @apply absolute -inset-3;
+    }
+
+    .is-on & {
+      background-color: var(--hd-deep);
+      color: var(--hd-on-primary);
+      box-shadow: none;
+    }
+  }
+
+  &__photo {
+    @apply relative block overflow-hidden rounded-xl;
+    aspect-ratio: 94 / 96;
+    background-color: var(--hd-bg);
+  }
+
+  &__img {
+    @apply absolute inset-0 h-full w-full object-cover;
+    mix-blend-mode: multiply;
+  }
+
+  &__name {
+    @apply line-clamp-2 px-1 text-xs font-medium;
+    color: var(--hd-text);
+  }
+
+  &__price {
+    @apply px-1 text-xs;
+    color: var(--hd-muted);
+  }
+
+  &__foot {
+    @apply mt-3.5 flex items-center justify-between gap-3 lg:max-w-2xl;
+  }
+
+  &__total {
+    @apply m-0 flex items-baseline gap-2;
+  }
+
+  &__now {
+    @apply text-lg font-semibold;
+    color: var(--hd-text);
+  }
+
+  &__was {
+    @apply text-xs;
+    color: var(--hd-muted);
+  }
+
+  &__add {
+    @apply min-h-[44px] px-5;
+  }
+}
