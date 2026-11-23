@@ -666,14 +666,14 @@
             "required": true,
             "selected": [
                 {
-                    "label": "حسب شكل الصورة",
+                    "label": "شكل هُدوء (الافتراضي)",
                     "value": "auto",
                     "key": "product-card-img-ratio-auto"
                 }
             ],
             "options": [
                 {
-                    "label": "حسب شكل الصورة",
+                    "label": "شكل هُدوء (الافتراضي)",
                     "value": "auto",
                     "key": "product-card-img-ratio-auto"
                 },
@@ -1050,17 +1050,6 @@
             "label": "تفعيل إشعار الإضافة للسلة المحسن",
             "description": null,
             "id": "enable_add_product_toast",
-            "format": "switch",
-            "required": false,
-            "value": true,
-            "selected": true
-        },
-        {
-            "type": "boolean",
-            "icon": "sicon-toggle-off",
-            "label": "إظهار زر \"أعلمني عند التوفر\" في بطاقة المنتج",
-            "description": "يظهر زر إشعار التوفر في بطاقات المنتجات التي نفذت كميتها",
-            "id": "notify_when_available_in_card",
             "format": "switch",
             "required": false,
             "value": true,

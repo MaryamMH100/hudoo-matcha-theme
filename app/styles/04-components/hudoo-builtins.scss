@@ -1,0 +1,107 @@
+/* =========================================================================
+   Hudoo look for Salla's built-in blocks and the starter's remaining blocks
+   (products slider, featured products, testimonials, brands, blog, banners,
+   store features, YouTube…). Salla's review asks for one look across every
+   page, so these share the Hudoo headings, colours and corners.
+   Loaded after home-blocks.scss, so these rules win without `!important`
+   where the selectors match.
+   ========================================================================= */
+
+/* Section titles: Amiri, deep, like the Hudoo section heads. */
+.s-block__title h2,
+.s-block__title > h2,
+h2.s-block__title,
+.s-products-carousel__title,
+.s-blog__title,
+.s-text-photos-slider__title,
+.s-block .scroll-carousel__head h2 {
+  font-family: var(--hd-font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.35;
+  color: var(--hd-deep);
+
+  @media (min-width: 1024px) {
+    font-size: 36px;
+  }
+}
+
+.s-block__title p,
+.s-block__title .s-block__subtitle {
+  color: var(--hd-muted-text);
+}
+
+/* «عرض الكل» links. */
+.s-block__display-all {
+  color: var(--hd-primary);
+  font-weight: 500;
+
+  &:hover {
+    color: var(--hd-deep);
+  }
+}
+
+/* White cards and panels inside blocks take the card surface and Hudoo corners. */
+.s-block {
+  .bg-white {
+    background-color: var(--hd-surface);
+  }
+
+  .rounded,
+  .rounded-md,
+  .rounded-lg {
+    border-radius: var(--hd-radius-sm);
+  }
+
+  .text-gray-500,
+  .text-gray-600 {
+    color: var(--hd-muted-text);
+  }
+
+  .text-gray-800,
+  .text-gray-900 {
+    color: var(--hd-text);
+  }
+
+  .border-gray-100,
+  .border-gray-200 {
+    border-color: var(--hd-line);
+  }
+}
+
+/* Full-bleed grey bands (testimonials, blog) become the surface colour. */
+.s-block--full-bg[class*='testimonials'],
+.s-block--blog,
+.s-block--custom-testimonials {
+  background-color: var(--hd-surface);
+}
+
+/* Store features (payment, shipping…): icons in the primary colour. */
+.s-block--store-features,
+.s-block--features {
+  [class^='sicon-'],
+  [class*=' sicon-'] {
+    color: var(--hd-primary);
+  }
+}
+
+/* Salla web components used by these blocks: reviews and sliders. */
+salla-reviews,
+salla-slider {
+  --color-primary: var(--hd-primary);
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--hd-deep) !important;
+}
+
+/* The no-content placeholder (empty category, empty cart, 404). */
+.no-content-placeholder,
+.s-no-content {
+  color: var(--hd-muted-text);
+
+  .icon,
+  i {
+    color: var(--hd-line);
+  }
+}

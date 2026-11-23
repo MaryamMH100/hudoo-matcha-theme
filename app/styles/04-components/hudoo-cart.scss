@@ -8,7 +8,7 @@
 
   &__count {
     @apply font-sans text-lg font-medium;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 }
 
@@ -53,7 +53,7 @@
 /* ---- items: photo at the start (88 × 100, radius 16), text, price + stepper at the end */
 .cart-titles {
   border-color: var(--hd-line) !important;
-  color: var(--hd-muted) !important;
+  color: var(--hd-muted-text) !important;
 }
 
 .cart-item {
@@ -70,7 +70,7 @@
 
   .text-gray-500,
   .text-gray-400 {
-    color: var(--hd-muted) !important;
+    color: var(--hd-muted-text) !important;
   }
 
   .s-quantity-input-container {
@@ -80,13 +80,13 @@
   }
 
   .cart-item__delete:hover {
-    color: var(--hd-accent) !important;
+    color: var(--hd-accent-strong) !important;
   }
 }
 
 .hd-cart-grade {
   @apply inline-flex items-center gap-1.5 text-xs;
-  color: var(--hd-muted);
+  color: var(--hd-muted-text);
 
   &__dot {
     @apply h-[7px] w-[7px] rounded-full;
@@ -128,7 +128,7 @@
 
   &__hint {
     @apply truncate text-[11.5px];
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 
   &__add {
@@ -156,7 +156,7 @@
   box-shadow: none !important;
 
   .text-gray-500 {
-    color: var(--hd-muted) !important;
+    color: var(--hd-muted-text) !important;
   }
 
   .border-gray-200 {

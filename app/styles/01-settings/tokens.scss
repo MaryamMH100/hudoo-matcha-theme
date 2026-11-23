@@ -39,3 +39,13 @@
   /* Salla web components read this for their default corners. */
   --s-radius: 18px;
 }
+
+/* Text-safe versions of two brand colours (WCAG AA, 4.5:1 on the page and card
+   backgrounds, in both presets). Defined on `body`, where <ThemeTokens> writes
+   the preset / merchant colours, so they follow any change.
+   · muted-text: secondary text (counts, meta lines, hints)
+   · accent-strong: clay used as text, or behind small white text (badges) */
+body {
+  --hd-muted-text: color-mix(in srgb, var(--hd-muted) 88%, var(--hd-text));
+  --hd-accent-strong: color-mix(in srgb, var(--hd-accent) 68%, var(--hd-text));
+}

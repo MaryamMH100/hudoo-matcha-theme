@@ -75,11 +75,11 @@
     }
 
     &:hover {
-      color: var(--hd-accent);
+      color: var(--hd-accent-strong);
     }
 
     &.is-active {
-      color: var(--hd-accent);
+      color: var(--hd-accent-strong);
 
       path {
         fill: currentColor;
@@ -90,7 +90,7 @@
   &__flag {
     @apply pointer-events-none absolute bottom-2.5 z-[2] rounded-full px-2.5 py-1 text-[11px] font-semibold;
     inset-inline-start: 10px;
-    background-color: var(--hd-accent);
+    background-color: var(--hd-accent-strong);
     color: var(--hd-on-primary);
 
     &--out {
@@ -118,7 +118,7 @@
 
   &__meta {
     @apply m-0 -mt-1 truncate text-xs;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 
   &__row {
@@ -134,18 +134,18 @@
     color: var(--hd-text);
 
     &.is-sale {
-      color: var(--hd-accent);
+      color: var(--hd-accent-strong);
     }
   }
 
   &__was {
     @apply text-xs;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 
   &__from {
     @apply text-xs;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 
   /* «+»: a 34px deep circle (Figma), 44px tap area. */
@@ -204,4 +204,18 @@
     column-gap: 14px;
     row-gap: 24px;
   }
+}
+
+/* Merchant setting `product_card_img_ratio` (ThemeLayout adds the class):
+   Figma's shape by default (`auto`), or square / landscape / portrait. */
+.product-card-img--square .hd-card--vertical .hd-card__media {
+  aspect-ratio: 1;
+}
+
+.product-card-img--landscape .hd-card--vertical .hd-card__media {
+  aspect-ratio: 4 / 3;
+}
+
+.product-card-img--portrait .hd-card--vertical .hd-card__media {
+  aspect-ratio: 3 / 4;
 }

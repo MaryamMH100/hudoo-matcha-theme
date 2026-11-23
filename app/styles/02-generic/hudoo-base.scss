@@ -23,7 +23,7 @@ body {
 .hd-eyebrow {
   @apply m-0 text-xs font-semibold;
   letter-spacing: 0.04em;
-  color: var(--hd-accent);
+  color: var(--hd-accent-strong);
 
   &--light {
     color: var(--hd-highlight);

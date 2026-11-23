@@ -51,7 +51,7 @@
 }
 
 .main-content .product-entry__sub-title {
-  color: var(--hd-muted);
+  color: var(--hd-muted-text);
 }
 
 .hd-product-price {
@@ -67,7 +67,7 @@
   }
 
   .line-through {
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 }
 
@@ -81,7 +81,7 @@
 .main-content .article--main {
   @apply text-sm;
   line-height: 1.7;
-  color: var(--hd-muted);
+  color: var(--hd-muted-text);
 }
 
 /* Salla options: size choices as cards (Figma «الحجم»), the chosen one ringed in deep. */
@@ -206,7 +206,7 @@ salla-product-options {
 
   &__word {
     @apply w-16 shrink-0 text-end text-xs;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 }
 
@@ -246,7 +246,7 @@ salla-product-options {
 
   &__hint {
     @apply text-xs;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 }
 
@@ -256,7 +256,7 @@ salla-product-options {
 
   &__text {
     @apply -mt-1.5 mb-3.5 text-[13px];
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 
   &__items {
@@ -310,7 +310,7 @@ salla-product-options {
 
   &__price {
     @apply px-1 text-xs;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 
   &__foot {
@@ -328,7 +328,7 @@ salla-product-options {
 
   &__was {
     @apply text-xs;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 
   &__add {

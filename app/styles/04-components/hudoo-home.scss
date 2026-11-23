@@ -118,7 +118,7 @@
 
     &__text {
       @apply text-base;
-      color: var(--hd-muted);
+      color: var(--hd-muted-text);
     }
 
     .hd-btn--ghost-light {
@@ -224,7 +224,7 @@
   &__desc {
     @apply m-0 mt-1 text-[13.5px] lg:text-[15px];
     line-height: 1.6;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 
   &__tastes {
@@ -238,7 +238,7 @@
 
     dt {
       @apply text-xs;
-      color: var(--hd-muted);
+      color: var(--hd-muted-text);
     }
 
     dd {
@@ -259,7 +259,7 @@
 
   &__tab {
     @apply flex min-h-[44px] flex-1 items-center justify-center rounded-full px-2 text-[13px] transition-colors;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
 
     &:hover {
       color: var(--hd-deep);
@@ -279,7 +279,7 @@
 
   &__label {
     @apply m-0 text-xs font-medium;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 
   &__track {
@@ -318,7 +318,7 @@
 
   &__ends {
     @apply flex justify-between text-[11px];
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 }
 
@@ -445,7 +445,7 @@
 
   &__label {
     @apply text-[11.5px] lg:text-sm;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
   }
 }
 
@@ -516,7 +516,7 @@
 
   &__meta {
     @apply m-0 text-[12.5px] lg:text-sm;
-    color: var(--hd-muted);
+    color: var(--hd-muted-text);
     word-spacing: 0.15em;
   }
 
